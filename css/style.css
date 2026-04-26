@@ -407,7 +407,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .sectionbox .visualbox .screen { height: 257.5px; top: 7px; border-radius: 6px; } 
  .sectionbox .mobilebox { width: 63.33%; } 
  .sectionbox .textbox .detail .item { gap: 30px; } 
- .section5 .mobilebox .visualbox2 .screen { width: 73%; height: 273px; top: 9px; left: 48px; border-radius: 15px 13px 12px 16px; transform: rotateY(-33deg); } 
+ .section5 .mobilebox .visualbox2 .screen { width: 73%; height: 244px; top: 8.5px; left: 42px; border-radius: 15px 13px 12px 16px; transform: rotateY(-33deg); } 
  .sectionbox .textbox .detail { margin-top: 16px; } 
  .sectionbox .textbox .detail .item .label { width: 90px; } 
  .sectionbox .textbox .detail .btn-detail { margin-top: 10px; } 

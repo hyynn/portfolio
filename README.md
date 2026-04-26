@@ -1,5 +1,5 @@
 # Sehee Na - Portfolio
-웹 디자이너 겸 퍼블리셔 나세희의 포트폴리오 사이트입니다.
+웹 디자이너 겸 퍼블리셔 나세희의 포트폴리오입니다.
 
 ## Tech Stack
 HTML, CSS, SCSS, Vanilla JS, jQuery, GSAP
