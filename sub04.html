@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL102P072S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-DL102P072S');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - Essential Studio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body class="sub sub04">
+    <header>
+        <div class="centerbox sub-topmenu">
+            <div class="sub-btn">
+                <a href="index.html#section04" class="btn-back">
+                    <span class="full-text">←&nbsp;&nbsp; Back to Portfolio</span>
+                    <span class="short-text">←&nbsp;&nbsp; Back</span>
+                </a>
+                <a href="https://hyynn.github.io/essential-studio/" target="_blank" class="btn-visit">
+                    <span class="full-text">Visit the Website &nbsp;&nbsp;→</span>
+                    <span class="short-text">Visit Website&nbsp;&nbsp;→</span>
+                </a>
+            </div>
+            <div class="project-header">
+                <h1 class="project-title">Essential Studio</h1>
+                <p class="project-subtitle">크리에이티브 디자인 에이전시 브랜드 사이트</p>
+                <div class="project-info">
+                    <div class="info-item">
+                        <span class="info-label">Duration:</span>
+                        <span class="info-value">2025.08 (집중작업 2일 + 리팩토링 2일)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Role:</span>
+                        <span class="info-value">UI/UX Design, Web Publishing 100%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tool:</span>
+                        <span class="info-value">Figma, Whisk AI</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tech Stack:</span>
+                        <span class="info-value">HTML, SCSS, jQuery, GSAP, Swiper</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Pages:</span>
+                        <span class="info-value">Main page</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Responsive:</span>
+                        <span class="info-value">Desktop / Tablet / Mobile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="detail-container centerbox">
+        <div class="tab-buttons" role="tablist" aria-label="프로젝트 상세">
+            <button class="tab-button active" data-tab="process" role="tab" aria-selected="true" aria-controls="process-tab">Process</button>
+            <button class="tab-button" data-tab="main" role="tab" aria-selected="false" aria-controls="main-tab">Main</button>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="detail-main">
+                <!-- Process Tab -->
+                <div id="process-tab" class="tab-content active" role="tabpanel" aria-labelledby="process-tab-btn">
+                    <div class="workflow-container">
+                        <h2 class="workflow-title">Project Workflow</h2>
+                        <div class="workflow-timeline">
+                            <div class="workflow-step">
+                                <div class="step-number">01</div>
+                                <div class="step-content">
+                                    <h3>Discovery</h3>
+                                    <ul>
+                                        <li>크리에이티브 디자인 에이전시 특성 파악</li>
+                                        <li>작업물이 중심이 되는 포트폴리오 사이트 기획</li>
+                                        <li>레퍼런스 수집 및 차별화 방향 설정</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">02</div>
+                                <div class="step-content">
+                                    <h3>Design</h3>
+                                    <ul>
+                                        <li>Apple Liquid Glass 트렌드를 기반 글래스모피즘 디자인 컨셉 수립</li>
+                                        <li>작업물이 돋보이도록 무채색 컬러 팔레트 선정</li>
+                                        <li>다크 톤 베이스 + Whisk AI로 생성한 3D 오브젝트를 비주얼 이미지로 활용</li>
+                                        <li>Figma로 와이어프레임 및 UI 디자인</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">03</div>
+                                <div class="step-content">
+                                    <h3>Development</h3>
+                                    <ul>
+                                        <li>SCSS mixin으로 glass, glass-card, section-textbox 공통 스타일 관리</li>
+                                        <li>GSAP SplitText로 슬로건을 char 단위로 분리, bounce.out ease로 위에서 떨어지는 효과 구현</li>
+                                        <li>검색 클릭 시 toggleClass로 비주얼 어둡게 처리, fadeToggle로 검색창 표시/숨김 구현</li>
+                                        <li>Swiper Infinity Loop로 포트폴리오 무한 슬라이드 구현</li>
+                                        <li>requestAnimationFrame 기반 커스텀 커서 물방울 효과 구현, 터치 디바이스 분기 처리</li>
+                                        <li>radial-gradient + CSS 변수(--x, --y)로 마우스 위치 기반 카드 shimmer 효과 구현</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">04</div>
+                                <div class="step-content">
+                                    <h3>Refactoring</h3>
+                                    <ul>
+                                        <li>CSS 변수(:root) 도입으로 컬러/shadow/radius 중앙 관리</li>
+                                        <li>glass-card mixin에 aspect-ratio: 1/1로 정방형 보장</li>
+                                        <li>section3 big-glass 제거, flex 레이아웃으로 재설계</li>
+                                        <li>button 태그 전환 및 aria-label 추가 (시맨틱 마크업 개선)</li>
+                                        <li>vh 단위 제거, clamp 기반 반응형 타이포그래피 적용</li>
+                                        <li>slidesPerView: 'auto' + 고정 폭(280px) 슬라이드로 변경</li>
+                                        <li>section3 navigation 제거, Swiper pagination으로 대체</li>
+                                        <li>section3 좌우 클릭 이동 이벤트 구현</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">05</div>
+                                <div class="step-content">
+                                    <h3>QA</h3>
+                                    <ul>
+                                        <li>크로스 브라우징 테스트 (Chrome, Safari)</li>
+                                        <li>반응형 검증 (1280/1024/768/480px 브레이크포인트)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">06</div>
+                                <div class="step-content">
+                                    <h3>Deploy</h3>
+                                    <ul>
+                                        <li>GitHub Pages 배포</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Tab -->
+                <div id="main-tab" class="tab-content" role="tabpanel" aria-labelledby="main-tab-btn">
+                    <div class="page-preview-container" id="main-preview-container">
+                        <img src="images/sub04/main.png" alt="Essential Studio 메인 화면" class="page-preview-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Sidebar -->
+            <div class="detail-sidebar-process sidebar-content active" id="process-sidebar">
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Style Guide</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">프로젝트의 일관성을 위한 디자인 시스템</p>
+
+                        <div class="style-guide-section">
+                            <h4>Color Palette</h4>
+                            <div class="color-palette-detail">
+                                <div class="color-item">
+                                    <span class="color-preview" style="background: #4A6FA5;"></span>
+                                    <div class="color-info">
+                                        <strong>#4A6FA5</strong>
+                                        <p>Point Color - 커서, pagination</p>
+                                    </div>
+                                </div>
+                                <div class="color-item">
+                                    <span class="color-preview" style="background: #3a3a3a;"></span>
+                                    <div class="color-info">
+                                        <strong>#3A3A3A</strong>
+                                        <p>본문 텍스트</p>
+                                    </div>
+                                </div>
+                                <div class="color-item">
+                                    <span class="color-preview" style="background: #FBFAF9; border: 1px solid #ddd;"></span>
+                                    <div class="color-info">
+                                        <strong>#FBFAF9</strong>
+                                        <p>Warm White - 배경</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="style-guide-section">
+                            <h4>Typography</h4>
+                            <div class="typography-detail">
+                                <div class="font-item">
+                                    <strong>Pretendard</strong>
+                                    <p>본문 텍스트 - 가독성과 모던한 느낌</p>
+                                </div>
+                                <div class="font-item">
+                                    <strong>Stunning</strong>
+                                    <p>로고 텍스트 - 세련되고 독특한 느낌</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Design Decisions</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">주요 디자인 결정과 그 이유</p>
+
+                        <div class="decision-item">
+                            <h4>글래스모피즘 선택 배경</h4>
+                            <p>Apple과 Figma에서 Liquid Glass가 출시되던 시점에 맞춰, 해당 트렌드를 코드로 직접 구현해보기 위해 디자인 방향으로 선택했습니다. 작업물이 돋보이도록 배경을 무채색으로 절제하되, 글래스모피즘 효과로 깊이감과 현대적인 감도를 동시에 표현했습니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>다크 톤 메인 비주얼</h4>
+                            <p>포트폴리오 이미지가 더욱 선명하게 보이도록 다크 톤을 선택했습니다. 밝은 섹션과의 대비로 비주얼 임팩트를 높였습니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>GSAP SplitText 애니메이션</h4>
+                            <p>슬로건을 char 단위로 분리해 위에서 bounce.out ease로 떨어지는 효과를 구현했습니다. 슬라이드1/2 모두 split 처리해 DOM 구조를 동일하게 유지함으로써 슬라이드 전환 시 레이아웃 어긋남을 방지했습니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>커스텀 커서</h4>
+                            <p>requestAnimationFrame으로 follower가 목표 위치로 조금씩 이동하는 물방울 효과를 구현했습니다. 터치 디바이스에서는 insertAdjacentHTML로 cursor: auto를 동적 주입해 기본 커서로 복원됩니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>카드 shimmer 효과</h4>
+                            <p>radial-gradient와 CSS 변수(--x, --y)를 활용해 마우스 위치 기반 빛 반사 효과를 구현했습니다. 글래스모피즘 컨셉을 인터랙션으로 확장했습니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>CSS 변수 &amp; clamp() 도입</h4>
+                            <p>리팩토링 과정에서 :root CSS 변수로 컬러/shadow/radius를 중앙 관리하고, clamp()로 브레이크포인트별 font-size 재선언을 제거했습니다. 뷰포트에 따라 자연스럽게 스케일됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Sidebar -->
+            <div class="detail-sidebar-main sidebar-content" id="main-sidebar">
+                <div class="section-card" data-section="header">
+                    <div class="card-header">
+                        <h3 class="card-title">Header - Search box</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">검색 클릭 시 toggleClass로 비주얼에 클래스를 추가해 배경을 어둡게 처리하고, fadeToggle로 검색창을 표시/숨김 처리했습니다. 닫기 버튼에는 fadeOut(300)을 적용해 자연스럽게 사라지도록 구현했습니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub04/main-01-01.png" alt="Search Box 1">
+                            <img src="images/sub04/main-01-02.png" alt="Search Box 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="visual">
+                    <div class="card-header">
+                        <h3 class="card-title">Visual</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">GSAP SplitText로 슬로건을 char 단위로 분리해 위에서 떨어지는 효과를 구현했습니다. 슬라이드1/2 모두 split 처리해 DOM 구조를 통일함으로써 슬라이드 전환 시 텍스트 위치 어긋남을 방지했습니다. Swiper Infinity Loop로 비주얼 이미지가 자동 순환됩니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub04/main-02-01.png" alt="Visual 1">
+                            <img src="images/sub04/main-02-02.png" alt="Visual 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="section1">
+                    <div class="card-header">
+                        <h3 class="card-title">Section 1</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">slidesPerView: 'auto'와 고정 폭(280px) 슬라이드로 뷰포트에 따라 자연스럽게 노출 개수가 결정됩니다. 좌측 텍스트박스에 glass mixin을 적용해 글래스모피즘 요소(backdrop-filter, rgba)를 구현했습니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub04/main-03-01.png" alt="Section 1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="section2">
+                    <div class="card-header">
+                        <h3 class="card-title">Section 2 &amp; 4</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">glass-card mixin으로 vision-card와 client-card를 구성했습니다. Section 2의 첫 번째 카드는 grid-row: 1/3으로 좌측에 크게 배치하고 나머지 두 카드는 우측에 2행으로 쌓이는 레이아웃입니다. 두 섹션 모두 호버 시 radial-gradient shimmer 효과가 마우스 위치를 따라 움직입니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub04/main-04-01.png" alt="Section 2&4">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="section3">
+                    <div class="card-header">
+                        <h3 class="card-title">Section 3</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Swiper pagination으로 슬라이드 인디케이터를 구성했습니다. 슬라이드 좌우 클릭으로 이동할 수 있으며, pagination bullet 클릭과의 이벤트 충돌을 closest()로 방지했습니다. pauseOnMouseEnter로 호버 시 자동재생이 멈춥니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub04/main-05-01.png" alt="Section 3-1">
+                            <img src="images/sub04/main-05-02.png" alt="Section 3-2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="cursor">
+                    <div class="card-header">
+                        <h3 class="card-title">Custom Cursor</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">requestAnimationFrame으로 follower가 목표 위치로 조금씩 이동하는 물방울 효과를 구현했습니다. 클릭 시 cursor가 줄어들고 follower가 퍼지며 물방울 퍼짐 효과를 연출합니다. 터치 디바이스에서는 커서를 숨기고 기본 커서로 복원됩니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub04/main-06-01.png" alt="Custom Cursor">
+                            <img src="images/sub04/main-06-02.png" alt="Custom Cursor">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="footer">
+                    <div class="card-header">
+                        <h3 class="card-title">Footer</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">border-top 구분선으로 심플하게 처리했습니다. tel: 링크로 고객상담 대표번호에 바로 연결되도록 구현했습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <!-- footer -->
+    </footer>
+
+    <button id="scrollTop" class="scroll-top-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333333">
+            <path d="M444-726 267-549l-51-51 264-264 264 264-51 51-177-177v294h-72v-294Zm0 486v-120h72v120h-72Zm0 144v-72h72v72h-72Z" fill="#333" stroke="#fafafa" stroke-width="20" paint-order="stroke fill" />
+        </svg>
+    </button>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script/action.js"></script>
+</body>
+
+</html>

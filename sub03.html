@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL102P072S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-DL102P072S');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - Entro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body class="sub sub03">
+    <header>
+        <div class="centerbox sub-topmenu">
+            <div class="sub-btn">
+                <a href="index.html#section03" class="btn-back">
+                    <span class="full-text">←&nbsp;&nbsp; Back to Portfolio</span>
+                    <span class="short-text">←&nbsp;&nbsp; Back</span>
+                </a>
+                <a href="https://hyynn.github.io/entro/" target="_blank" class="btn-visit">
+                    <span class="full-text">Visit the Website &nbsp;&nbsp;→</span>
+                    <span class="short-text">Visit Website&nbsp;&nbsp;→</span>
+                </a>
+            </div>
+            <div class="project-header">
+                <h1 class="project-title">Entro</h1>
+                <p class="project-subtitle">무인 키오스크 브랜드의 전환율 중심 랜딩페이지</p>
+                <div class="project-info">
+                    <div class="info-item">
+                        <span class="info-label">Duration:</span>
+                        <span class="info-value">2025.07 (집중작업 3일 + 리팩토링 2일)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Role:</span>
+                        <span class="info-value">UI/UX Design, Web Publishing 100%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tool:</span>
+                        <span class="info-value">Figma, Whisk AI</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tech Stack:</span>
+                        <span class="info-value">HTML5, CSS3, Vanilla JS</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Pages:</span>
+                        <span class="info-value">Landing page (Single page)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Responsive:</span>
+                        <span class="info-value">Desktop / Tablet / Mobile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="detail-container centerbox">
+        <div class="tab-buttons" role="tablist" aria-label="프로젝트 상세">
+            <button class="tab-button active" data-tab="process" role="tab" aria-selected="true" aria-controls="process-tab">Process</button>
+            <button class="tab-button" data-tab="main" role="tab" aria-selected="false" aria-controls="main-tab">After</button>
+            <button class="tab-button" data-tab="before" role="tab" aria-selected="false" aria-controls="before-tab">Before</button>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="detail-main">
+
+                <!-- Process Tab -->
+                <div id="process-tab" class="tab-content active" role="tabpanel" aria-labelledby="process-tab-btn">
+                    <div class="workflow-container">
+                        <h2 class="workflow-title">Project Workflow</h2>
+                        <div class="workflow-timeline">
+
+                            <div class="workflow-step">
+                                <div class="step-number">01</div>
+                                <div class="step-content">
+                                    <h3>Discovery</h3>
+                                    <ul>
+                                        <li>기존 작업물의 구조적 문제 분석</li>
+                                        <li>실제 SaaS 랜딩페이지 레퍼런스 분석</li>
+                                        <li>공감 → 솔루션 → 신뢰 → 행동 흐름으로 섹션 재기획</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">02</div>
+                                <div class="step-content">
+                                    <h3>Design</h3>
+                                    <ul>
+                                        <li>white / bgC / mainC 3단계 배경색 전략으로 섹션 간 시각적 리듬 구성</li>
+                                        <li>Whisk AI로 생성한 키오스크 제품 이미지 활용</li>
+                                        <li>Figma로 와이어프레임 및 UI 디자인 - Bento Grid, 탭 UI 레이아웃 설계</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">03</div>
+                                <div class="step-content">
+                                    <h3>Development</h3>
+                                    <ul>
+                                        <li>jQuery 제거, Vanilla JS 기반으로 전환</li>
+                                        <li>탭 UI - WAI-ARIA 속성 적용, 탭 전환 시 Bento 카드 순차 페이드인</li>
+                                        <li>Intersection Observer 기반 카운트업 애니메이션 - easeOutCubic 적용</li>
+                                        <li>GNB 활성 섹션 자동 표시 - 스크롤 이벤트 대신 Observer로 성능 최적화</li>
+                                        <li>Solution 카드 - 터치 디바이스에서 클릭으로 오버레이 토글 분기 처리</li>
+                                        <li>시맨틱 마크업 및 heading 계층 정리, 접근성 속성 추가</li>
+                                        <li>clamp() 전체 재계산, vh 단위 제거 및 vw 기반으로 통일</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">04</div>
+                                <div class="step-content">
+                                    <h3>QA</h3>
+                                    <ul>
+                                        <li>크로스 브라우징 테스트 (Chrome, Safari)</li>
+                                        <li>반응형 검증 (880px / 600px / 414px / 324px)</li>
+                                        <li>터치 디바이스 인터랙션 동작 확인</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="workflow-step">
+                                <div class="step-number">05</div>
+                                <div class="step-content">
+                                    <h3>Deploy</h3>
+                                    <ul>
+                                        <li>GitHub Pages 배포</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maind(After) Tab -->
+                <div id="main-tab" class="tab-content" role="tabpanel" aria-labelledby="main-tab-btn">
+                    <div class="page-preview-container" id="main-preview-container">
+                        <img src="images/sub03/main.png" alt="Entro 리디자인 후 전체 화면" class="page-preview-image">
+                    </div>
+                </div>
+
+                <!-- Before Tab -->
+                <div id="before-tab" class="tab-content" role="tabpanel" aria-labelledby="before-tab-btn">
+                    <div class="page-preview-container" id="before-preview-container">
+                        <img src="images/sub03/main-before.png" alt="Entro 리디자인 전 전체 화면" class="page-preview-image">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Process Sidebar -->
+            <div class="detail-sidebar-process sidebar-content active" id="process-sidebar">
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Style Guide</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">일관성 있는 UI를 위한 디자인 시스템</p>
+
+                        <div class="style-guide-section">
+                            <h4>Color Palette</h4>
+                            <div class="color-palette-detail">
+                                <div class="color-item">
+                                    <span class="color-preview" style="background: #22356F;"></span>
+                                    <div class="color-info">
+                                        <strong>#22356F</strong>
+                                        <p>Main - 신뢰감과 전문성을 전달하는 네이비</p>
+                                    </div>
+                                </div>
+                                <div class="color-item">
+                                    <span class="color-preview" style="background: #4A90E2;"></span>
+                                    <div class="color-info">
+                                        <strong>#4A90E2</strong>
+                                        <p>Point - CTA와 강조 요소에 사용하는 스카이 블루</p>
+                                    </div>
+                                </div>
+                                <div class="color-item">
+                                    <span class="color-preview" style="background: #D9E2F3;"></span>
+                                    <div class="color-info">
+                                        <strong>#D9E2F3</strong>
+                                        <p>Background - 섹션 구분에 사용하는 연한 블루</p>
+                                    </div>
+                                </div>
+                                <div class="color-item">
+                                    <span class="color-preview" style="background: #333333;"></span>
+                                    <div class="color-info">
+                                        <strong>#333333</strong>
+                                        <p>Text - 본문 텍스트</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="style-guide-section">
+                            <h4>Typography</h4>
+                            <div class="typography-detail">
+                                <div class="font-item">
+                                    <strong>Pretendard</strong>
+                                    <p>전체 본문 - 가독성과 현대적인 느낌을 동시에 충족</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Design Decisions</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">주요 디자인 결정과 그 이유</p>
+
+                        <div class="decision-item">
+                            <h4>섹션 흐름 재설계</h4>
+                            <p>기존 기능 나열 구조를 공감 → 솔루션 → 신뢰 → 행동 순으로 바꿨습니다. 방문자가 제품에 공감하기 전에 기능 설명이 먼저 등장하는 문제를 해결했습니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>탭 UI + Bento Grid</h4>
+                            <p>기능 8개를 3섹션에 반복 나열하던 구조를 탭 UI로 통합하고, Bento Grid로 카드 크기에 정보의 중요도를 담았습니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>배경색 3단계 전략</h4>
+                            <p>흰 배경을 기본으로 bgC와 mainC를 각 2~3곳에만 배치했습니다. 배경 변화로 섹션을 구분하면서도 시각적 피로를 줄였습니다.</p>
+                        </div>
+
+                        <div class="decision-item">
+                            <h4>수치 중심 설득</h4>
+                            <p>텍스트 설명보다 수치가 공감을 빠르게 유발한다고 판단해 Stats Banner와 Cases 섹션에 수치를 전면 배치했습니다. 카운트업 애니메이션으로 시선을 집중시켰습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- After Sidebar -->
+            <div class="detail-sidebar-main sidebar-content" id="main-sidebar">
+
+                <div class="section-card" data-section="hero">
+                    <div class="card-header">
+                        <h3 class="card-title">Hero</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">CSS Grid로 이미지와 텍스트를 같은 셀에 겹쳐 position: absolute 없이 풀스크린 Hero를 구현했습니다. 페이지 진입 시 자연스러운 페이드인 애니메이션이 실행됩니다.</p>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="stats">
+                    <div class="card-header">
+                        <h3 class="card-title">Stats Banner</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Intersection Observer로 섹션 진입 시 카운트업 애니메이션이 1회 실행됩니다. ch 단위로 숫자 너비를 고정해 뷰포트 크기 변경 시 단위 정렬이 틀어지는 문제를 해결했습니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub03/main-stats.png" alt="Stats Banner 섹션">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="solutions">
+                    <div class="card-header">
+                        <h3 class="card-title">Solutions</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">카드 hover 시 그라디언트 오버레이가 페이드인됩니다. 터치 디바이스에서는 클릭으로 오버레이를 토글하도록 분기 처리했습니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub03/main-solutions-1.png" alt="Solutions 섹션">
+                            <img src="images/sub03/main-solutions-2.png" alt="Solutions 섹션">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="features">
+                    <div class="card-header">
+                        <h3 class="card-title">Features - Tab UI + Bento Grid</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">WAI-ARIA 속성을 적용한 탭 UI와 크기가 다른 카드로 구성한 Bento Grid를 결합했습니다. 탭 전환 시 카드가 100ms 간격으로 순차 페이드인됩니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub03/main-features.png" alt="Features 탭 UI 및 Bento Grid">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="cases">
+                    <div class="card-header">
+                        <h3 class="card-title">Cases</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">업종별 도입 효과를 수치 중심으로 구성했습니다. 텍스트 설명보다 수치 하나가 더 빠르게 신뢰를 전달한다고 판단해 case-stat을 카드의 핵심 요소로 배치했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="section-card" data-section="process">
+                    <div class="card-header">
+                        <h3 class="card-title">Process + Trust Numbers</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">3단계 프로세스 하단에 신뢰 수치 배너를 배치해 "이렇게 쉽게 시작할 수 있고, 이미 이만큼 많은 매장이 선택했다"는 흐름이 자연스럽게 이어지도록 구성했습니다.</p>
+                    </div>
+                </div>
+                <div class="section-card" data-section="gnb">
+                    <div class="card-header">
+                        <h3 class="card-title">Header - GNB 활성 표시</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Intersection Observer로 현재 섹션을 감지해 해당 GNB 링크에 active 클래스를 토글합니다. 스크롤 이벤트 대신 Observer를 사용해 성능 부담을 줄였습니다.</p>
+                        <div class="card-preview">
+                            <img src="images/sub03/main-header.png" alt="Header GNB 활성 표시">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Before Sidebar -->
+            <div class="detail-sidebar-before sidebar-content" id="before-sidebar">
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3 class="card-title">구조적 문제</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">기능 나열 중심의 구성으로 방문자가 공감하기 전에 제품 설명이 먼저 등장합니다. 랜딩페이지에서 가장 중요한 "내 문제를 해결해줄 수 있나"에 대한 답 없이 스크롤이 시작되어 이탈률이 높아지는 구조였습니다.</p>
+                        <p class="card-solution">공감 → 솔루션 → 신뢰 → 행동 순으로 섹션 흐름 재설계</p>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3 class="card-title">반복되는 패턴</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">아이콘 8개 × 3섹션이 동일한 레이아웃으로 반복되어 스크롤 피로도가 높습니다. 섹션 간 배경색 변화가 없어 어디까지 읽었는지 인지하기 어려운 상태였습니다.</p>
+                        <p class="card-solution">탭 UI + Bento Grid로 통합, 배경색 3단계 전략 적용</p>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3 class="card-title">기술적 개선점</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">jQuery 의존, vh 단위 혼용, heading 계층 불일치, 접근성 속성 부재 등 코드 품질 개선이 필요한 상태였습니다.</p>
+                        <p class="card-solution">Vanilla JS 전환, clamp() 재계산, 시맨틱 마크업 및 접근성 속성 정비</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <!-- footer -->
+    </footer>
+
+    <button id="scrollTop" class="scroll-top-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333333">
+            <path d="M444-726 267-549l-51-51 264-264 264 264-51 51-177-177v294h-72v-294Zm0 486v-120h72v120h-72Zm0 144v-72h72v72h-72Z" fill="#333" stroke="#fafafa" stroke-width="20" paint-order="stroke fill" />
+        </svg>
+    </button>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script/action.js"></script>
+</body>
+
+</html>
