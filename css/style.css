@@ -147,8 +147,8 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
 /* popup */
 .popup { background: #000; position: relative; z-index: 2; } 
 .popup-screen { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100vh; } 
-.popup-wrapper-3d { position: relative; perspective: 30vw; transform-style: preserve-3d; } 
-.popup-fold { overflow: hidden; width: 30vw; height: 86vh; } 
+.popup-wrapper-3d { position: relative; perspective: 20vw; transform-style: preserve-3d; } 
+.popup-fold { overflow: hidden; width: 30vw; height: 80vh; } 
 .popup-fold-top { position: absolute; transform-origin: bottom center; left: 0; right: 0; bottom: 100%; transform: rotateX(-120deg); } 
 .popup-fold-bottom { position: absolute; transform-origin: top center; right: 0; left: 0; top: 100%; transform: rotateX(120deg); } 
 .popup-fold-align { width: 100%; height: 100%; } 
@@ -332,8 +332,6 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .sectionbox .textbox .detail { margin-top: 30px; gap: 10px; } 
  .sectionbox .textbox .detail .btn-detail { margin-top: 20px; } 
  .section5 .mobilebox .visualbox2 .screen { width: 68%; height: 409.5px; top: 15px; left: 79.5px; border-radius: 20px 22px 22px 20px; transform: rotateY(-24deg); } 
- .popup-wrapper-3d { perspective: 32vw; } 
- .popup-fold { width: 32vw;} 
  .project-header { margin-bottom: 30px; } 
  .project-title { margin-bottom: 0; } 
  .detail-main { width: 55%; } 
@@ -360,8 +358,6 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .sectionbox .textbox { width: 40.33%; } 
  .sectionbox .textbox .detail { margin-top: 26px; gap: 6px; } 
  .sectionbox .textbox .detail .btn-detail { margin-top: 18px; } 
- .popup-wrapper-3d { perspective: 40vw; } 
- .popup-fold { width: 38vw; height: 88vh;} 
  .page-preview-container, .sidebar-content { padding: 20px 0; } 
  .section-card { margin-bottom: 20px; } 
  .detail-container { padding-right: 50px; } 
@@ -441,8 +437,6 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .sectionbox .textbox { width: 100%; } 
  .sectionbox .textbox h2 { margin-bottom: 14px; } 
  .sectionbox .textbox .detail { gap: 6px; } 
- .popup-wrapper-3d { perspective: 60vw; } 
- .popup-fold { width: 40vw; }
  .bottom-section { margin-top: 20px; } 
  .works-section .works-grid { grid-template-columns: 1fr; } 
  .banner h2 { top: 90px; } 
@@ -471,8 +465,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .works-section .works-body { gap: 40px; } 
  .sectionbox .textbox .detail { gap: 6px; margin-top: 20px; } 
  .popup-label { left: 20px; top: 20px; transform: none; } 
- .popup-wrapper-3d { perspective: 70vw; } 
- .popup-fold { width: 50vw; }
+ .popup-fold { width: 80vw; height: calc(80vw * 5 / 3); } 
  .tab-button .full-text { display: none; } 
  .tab-button .short-text { display: inline; } 
  .tab-button { padding: 12px 20px; } 
@@ -491,8 +484,6 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .profile-section .profile-meta { width: 250px; } 
  .profile-section .profile-grid { grid-template-columns: 1fr } 
  .profile-section .profile-block { gap: 4px; } 
- .popup-wrapper-3d { perspective: 80vw; } 
- .popup-fold { width: 66vw; }
  .tab-button { padding: 12px 10px; } 
  .step-content, .section-card { border-radius: 8px; } 
  .card-preview img { border-radius: 6px; } 
@@ -508,9 +499,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .description-box { width: 100%; order: -1; } 
  .profile-section .photo { width: 130px; } 
  .centerbox, .poster-container { width: 400px; } 
- .profile-section .profile-grid { align-items: center; } 
- .popup-wrapper-3d { perspective: 100vw; } 
- .popup-fold { width: 70vw; }
+.profile-section .profile-grid { align-items: center; } 
 }
 
 
