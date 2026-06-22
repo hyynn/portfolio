@@ -3,7 +3,8 @@
 a { text-decoration: none; color: #333; line-height: 1.5; letter-spacing: -0.025em; font-family: 'Paperozi', sans-serif; } 
 li { list-style: none; font-family: 'Paperozi', sans-serif; } 
 body { background-color: #f0f0f0; font-family: 'Paperozi', sans-serif; min-height: 100vh; margin: 0; line-height: 1.5; letter-spacing: -0.025em; background: #F3F0E9; color: #333; position: relative; } 
-body, html { overflow-x: hidden; } 
+body, html { overflow-x: hidden; }
+.pin-spacer { pointer-events: none; } 
 .centerbox { width: 1500px; margin: 0 auto; padding: 150px 0; } 
 h2 { font-size: clamp(24px, 2.60vw, 50px); font-weight: 500; } 
 h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; } 
