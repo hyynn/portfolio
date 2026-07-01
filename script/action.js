@@ -8,10 +8,11 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('active');
+            observer.unobserve(entry.target); // 최초 1회만 실행되도록 이후 관찰 중단
         }
-        else {
-            entry.target.classList.remove('active');
-        }
+        // else {
+        //     entry.target.classList.remove('active');
+        // }
     });
 }, observerOptions);
 
