@@ -172,6 +172,11 @@ document.querySelectorAll('.featured-compare figure').forEach(figure => {
 
 // Featured Project 아코디언
 const featuredToggles = document.querySelectorAll('.featured-point .point-toggle');
+
+if (window.innerWidth < 768) {
+    featuredToggles[0]?.setAttribute('aria-expanded', 'false');
+}
+
 featuredToggles.forEach(toggle => {
     toggle.addEventListener('click', function () {
         const isOpen = this.getAttribute('aria-expanded') === 'true';
