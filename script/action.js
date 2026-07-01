@@ -152,6 +152,34 @@ function initMobileNavigation() {
     });
 }
 
+// Featured Compare 이미지 hover 스크롤
+document.querySelectorAll('.featured-compare figure').forEach(figure => {
+    const img = figure.querySelector('img');
+    if (!img) return;
+
+    const setup = () => {
+        const distance = img.offsetHeight - figure.offsetHeight;
+        if (distance <= 0) return;
+        const duration = Math.max(2, (distance / 1000) * 3.5);
+        img.style.transition = `top ${duration}s linear`;
+        figure.addEventListener('mouseenter', () => { img.style.top = `-${distance}px`; });
+        figure.addEventListener('mouseleave', () => { img.style.top = '0'; });
+    };
+
+    if (img.complete && img.naturalHeight > 0) setup();
+    else img.addEventListener('load', setup);
+});
+
+// Featured Project 아코디언
+const featuredToggles = document.querySelectorAll('.featured-point .point-toggle');
+featuredToggles.forEach(toggle => {
+    toggle.addEventListener('click', function () {
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+        featuredToggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
+        this.setAttribute('aria-expanded', String(!isOpen));
+    });
+});
+
 // Document Ready
 $(document).ready(function () {
     // Footer 로드
