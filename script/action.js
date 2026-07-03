@@ -16,10 +16,11 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-//Visualbox img control
+//Visualbox img control (transition 시간 계산 + hover 스크롤)
 document.querySelectorAll('.sectionbox .visualbox .screen img, .sectionbox .mobilebox .visualbox2 .screen img').forEach(img => {
+    const screen = img.closest('.screen');
+
     img.addEventListener('load', function () {
-        const screen = this.closest('.screen');
         const screenHeight = screen.offsetHeight;
         const imgHeight = this.offsetHeight;
         const distance = imgHeight - screenHeight;
@@ -32,6 +33,13 @@ document.querySelectorAll('.sectionbox .visualbox .screen img, .sectionbox .mobi
     });
     // 이미 로드된 이미지 처리
     if (img.complete) img.dispatchEvent(new Event('load'));
+
+    screen.addEventListener('mouseenter', () => {
+        img.style.top = (screen.offsetHeight - img.offsetHeight) + 'px';
+    });
+    screen.addEventListener('mouseleave', () => {
+        img.style.top = '0';
+    });
 });
 
 // 모든 sectionbox의 textbox 관찰
@@ -91,9 +99,10 @@ function showTab(tabName, event) {
 // Section Navigation (Main, Sub1, Sub2, sub3 탭용)
 function initSectionNavigation(tabName) {
     const sidebar = document.getElementById(`${tabName}-sidebar`);
-    const sectionCards = sidebar.querySelectorAll('.section-card[data-section]');
+    if (!sidebar) return;
 
-    if (!sidebar || sectionCards.length === 0) return;
+    const sectionCards = sidebar.querySelectorAll('.section-card[data-section]');
+    if (sectionCards.length === 0) return;
 
     // 사이드바 카드 클릭 이벤트
     sectionCards.forEach(card => {
