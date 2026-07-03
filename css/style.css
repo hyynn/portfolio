@@ -322,12 +322,13 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
 .card-preview img { width: 48%; object-fit: contain; border-radius: 8px; transition: all 0.3s ease; } 
 .card-preview img:only-child { width: 100%; } 
 .card-preview img:hover { transform: scale(1.02); } 
-/* 이미지가 2개 있는 card-preview에서 호버 효과 */
-.card-preview:has(img:nth-child(2)) { display: flex; gap: 10px; } 
-.card-preview:has(img:nth-child(2)) img { flex: 1; transition: all 0.4s ease-out; } 
-.card-preview:has(img:nth-child(2)) img:hover { flex: 1 0 100%; transform: scale(1.02); z-index: 10; } 
-.card-preview:has(img:hover) { gap: 0; } 
-.card-preview:has(img:hover) img:not(:hover) { flex: 0; opacity: 0; width: 0; margin: 0; padding: 0; min-width: 0; overflow: hidden; } 
+/* 이미지가 2개 있는 card-preview에서 호버 효과 - flex-grow/gap 전환 (0.15s 지연으로 스쳐 지나갈 때 오작동 방지) */
+.card-preview:has(img:nth-child(2)) { display: flex; gap: 10px; transition: gap 0.4s ease 0.15s; }
+.card-preview:has(img:nth-child(2)) img { flex: 1; min-width: 0; transition: flex 0.4s ease 0.15s, opacity 0.3s ease 0.15s; }
+.card-preview:has(img:nth-child(2)) img:hover { transform: none; }
+.card-preview:has(img:hover) { gap: 0; }
+.card-preview:has(img:hover) img:not(:hover) { flex: 0; opacity: 0; }
+
 /* Process Sidebar Styles */
 .detail-sidebar-process .style-guide-section, .detail-sidebar-mobile .style-guide-section { margin-top: 20px; margin-bottom: 10px; } 
 .detail-sidebar-process h5, .detail-sidebar-mobile h5 { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 20px; } 
