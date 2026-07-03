@@ -51,7 +51,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
 /* 경력 */
 .works-section h2 { font-weight: normal; font-size: clamp(28px, 4.2vw, 80px); line-height: 1; margin-bottom: 60px; }
 .works-section .works-body { display: flex; flex-direction: column; gap: 60px; } 
-.works-section .works-label { color: #505050; margin-bottom: 30px; } 
+.works-section .works-label { color: #505050; margin-bottom: 30px; font-weight: 800;} 
 .works-section .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; } 
 .works-section .works-card { border-top: 1px solid #999; padding-top: 24px; display: flex; flex-direction: column; gap: 14px; } 
 .works-section .works-date { font-size: clamp(14px, 0.83vw, 16px); color: #505050; } 
@@ -91,7 +91,6 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
     linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
   background-size: 600px 600px; }
 .featured-header-inner { max-width: 760px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.featured-badge { display: inline-block; color: #C9A77C; padding: 6px 16px; border-radius: 4px; font-size: clamp(12px, 0.73vw, 14px); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 20px; }
 .featured-header-inner h2 { font-weight: 500; }
 .featured-intro { font-size: clamp(18px, 1.25vw, 24px); color: #505050; line-height: 1.6; margin-bottom: 20px; text-align: center;}
 .featured-meta { display: flex; flex-direction: column; align-items: center; gap: 32px; }

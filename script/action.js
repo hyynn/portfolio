@@ -161,7 +161,7 @@ document.querySelectorAll('.featured-compare figure').forEach(figure => {
     const setup = () => {
         const distance = img.offsetHeight - figure.offsetHeight;
         if (distance <= 0) return;
-        const duration = Math.max(2, (distance / 1000) * 3.5);
+        const duration = Math.max(3, (distance / 1000) * 3.5);
         img.style.transition = `top ${duration}s linear`;
         figure.addEventListener('mouseenter', () => { img.style.top = `-${distance}px`; });
         figure.addEventListener('mouseleave', () => { img.style.top = '0'; });
