@@ -179,12 +179,13 @@ gsap.timeline({
         opacity: 0, filter: "blur(8px)", duration: 1.0, stagger: 0.2, ease: "power2.out"
     }, "+=0.3")
 
-// featured project intro - featured-curtain을 고정한 채 두 레이어가 차례로 위로 올라와 덮는 2단 커튼 리빌
+// featured project intro - featured-curtain을 고정한 채 레이어들이 차례로 위로 올라와 덮는 커튼 리빌
+// featured-points-section은 pin 밖 일반 문서 흐름으로 이어지므로(카드 리빌 대상 아님) 이 타임라인에 포함하지 않는다.
 gsap.timeline({
     scrollTrigger: {
         trigger: ".featured-curtain",
         start: "top top",
-        end: "+=495%",
+        end: "+=393%",
         pin: true,
         scrub: 1,
         invalidateOnRefresh: true
@@ -198,9 +199,7 @@ gsap.timeline({
     .fromTo(".compare-main", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 2.4)
     .to({}, { duration: 0.3 }, 3.4)
     .fromTo(".compare-category", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 3.7)
-    .to({}, { duration: 0.3 }, 4.7)
-    .fromTo(".featured-points-section", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 5.0)
-    .to({}, { duration: 0.3 }, 6.0);
+    .to({}, { duration: 0.3 }, 4.7);
 
 // selected works intro 핀 + 헤딩 등장
 ScrollTrigger.create({

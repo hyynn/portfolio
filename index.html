@@ -322,86 +322,87 @@
                             </div>
                         </div>
 
-                        <div class="featured-points-section">
-                            <div class="centerbox featured-centerbox">
-                                <div class="featured-points">
+                    </div>
 
-                                    <div class="featured-point">
-                                        <button class="point-toggle" type="button" aria-expanded="true" aria-controls="point-body-1">
-                                            <span class="point-number">01</span>
-                                            <span class="point-title">실제 커머스 제약을 반영한 상품 데이터 설계</span>
-                                            <span class="point-icon" aria-hidden="true"></span>
-                                        </button>
-                                        <div class="point-body" id="point-body-1">
-                                            <ul>
-                                                <li><strong>한 상품이 여러 카테고리에 동시에 소속됨</strong><br>호텔침대는 퀸침대이면서 동시에 수납침대일 수 있습니다. 이런 실무적 상황을 표현하기 위해 주 분류 경로(category[ ])와 추가 소속(categoryTags[ ])을 분리해서 저장하되, getByCategory( ) 함수가 두 필드를 동시에 검색하도록 설계했습니다. 어느 쪽 분류로 진입해도 상품이 노출됩니다.</li>
-                                                <li><strong>컬러 차이와 구성 차이는 서로 다른 단위로</strong><br>색상만 다른 변형(화이트/차콜 등 컬러옵션)은 하나의 SKU로 묶어 colors[ ] 배열로 처리하고, 구성이 다른 변형(단품 vs 매트 세트)은 별도 SKU로 분리했습니다. 카드를 몇 장 보여줄지가 UI 결정이 아니라 데이터 구조 설계에서 결정된다는 것을 직접 구현하면서 실감했습니다.</li>
-                                                <li><strong>필터 연동을 위한 구조적 중복 저장</strong><br>카테고리 페이지 필터는 전체 상품 목록(catalog.ts)을 스캔해서 실제 옵션이 있는 축만 자동 노출합니다. 그래서 filterAttributes를 카드 요약(summaries[ ])과 상세 페이지 데이터(variantDetails) 양쪽에 모두 작성해야 했습니다. 이 중복이 실수가 아닌 구조적 필요임을 명시적으로 문서화했습니다.</li>
-                                            </ul>
-                                        </div>
+                    <div class="featured-points-section">
+                        <div class="centerbox featured-centerbox">
+                            <div class="featured-points">
+
+                                <div class="featured-point">
+                                    <button class="point-toggle" type="button" aria-expanded="true" aria-controls="point-body-1">
+                                        <span class="point-number">01</span>
+                                        <span class="point-title">실제 커머스 제약을 반영한 상품 데이터 설계</span>
+                                        <span class="point-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <div class="point-body" id="point-body-1">
+                                        <ul>
+                                            <li><strong>한 상품이 여러 카테고리에 동시에 소속됨</strong><br>호텔침대는 퀸침대이면서 동시에 수납침대일 수 있습니다. 이런 실무적 상황을 표현하기 위해 주 분류 경로(category[ ])와 추가 소속(categoryTags[ ])을 분리해서 저장하되, getByCategory( ) 함수가 두 필드를 동시에 검색하도록 설계했습니다. 어느 쪽 분류로 진입해도 상품이 노출됩니다.</li>
+                                            <li><strong>컬러 차이와 구성 차이는 서로 다른 단위로</strong><br>색상만 다른 변형(화이트/차콜 등 컬러옵션)은 하나의 SKU로 묶어 colors[ ] 배열로 처리하고, 구성이 다른 변형(단품 vs 매트 세트)은 별도 SKU로 분리했습니다. 카드를 몇 장 보여줄지가 UI 결정이 아니라 데이터 구조 설계에서 결정된다는 것을 직접 구현하면서 실감했습니다.</li>
+                                            <li><strong>필터 연동을 위한 구조적 중복 저장</strong><br>카테고리 페이지 필터는 전체 상품 목록(catalog.ts)을 스캔해서 실제 옵션이 있는 축만 자동 노출합니다. 그래서 filterAttributes를 카드 요약(summaries[ ])과 상세 페이지 데이터(variantDetails) 양쪽에 모두 작성해야 했습니다. 이 중복이 실수가 아닌 구조적 필요임을 명시적으로 문서화했습니다.</li>
+                                        </ul>
                                     </div>
-
-                                    <div class="featured-point">
-                                        <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-2">
-                                            <span class="point-number">02</span>
-                                            <span class="point-title">절제된 인터랙션 - "AI스러운" 기본값을 의도적으로 배제</span>
-                                            <span class="point-icon" aria-hidden="true"></span>
-                                        </button>
-                                        <div class="point-body" id="point-body-2">
-                                            <ul>
-                                                <li>AI 도구가 생성하는 UI에는 공통된 패턴이 있습니다. hover시 카드가 이동하고, 그림자가 과하게 설정되고, 이미지가 과하게 확대됩니다. 보는 관점에 따라 이런 효과가 나쁜 것만은 아니지만, 이 프로젝트에서는 CLAUDE.md에 명시하여 그런 패턴들을 의도적으로 배제하고, 절제된 인터랙션을 사용했습니다.</li>
-                                                <li><strong>상품 카드 hover - 이미지 교체</strong><br>hover 시 두 번째 갤러리 이미지로 자연스럽게 전환됩니다. scale 확대나 translateY 이동 없이 opacity 전환만 사용한 이유는, 두 효과가 겹치면 인터랙션이 과하다고 판단했기 때문입니다.</li>
-                                                <li><strong>토글 아이콘 - SVG path 교체</strong><br>공간 큐레이션의 상품 핀이 열릴 때 +가 -로 바뀝니다. AI스러운 CSS rotate 대신 열린 상태와 닫힌 상태의 SVG path 자체를 조건부로 교체합니다. 위를 가리키는 화살표와 아래를 가리키는 화살표 또한 동일한 아이콘을 회전시켜 사용하지 않고, 각각의 SVG를 사용했습니다.</li>
-                                                <li><strong>상세페이지의 영상 - 뷰포트 안에서만 재생</strong><br>IntersectionObserver가 영상 요소의 뷰포트 진입과 이탈을 감지합니다. 진입하면 재생, 이탈하면 일시정지, 다시 진입하면 멈춘 지점부터 이어서 재생됩니다. 사용자 의도 없이 반복 재생되는 영상은 노이즈라고 판단했습니다.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="featured-point">
-                                        <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-3">
-                                            <span class="point-number">03</span>
-                                            <span class="point-title">재사용 가능한 인터랙션 패턴</span>
-                                            <span class="point-icon" aria-hidden="true"></span>
-                                        </button>
-                                        <div class="point-body" id="point-body-3">
-                                            <ul>
-                                                <li><strong>가로 스크롤 버튼 패턴</strong><br>창 크기가 바뀔 때 스크롤 버튼이 뒤늦게 나타나거나 사라지는 현상을 막기 위해 ResizeObserver가 스크롤 영역 너비를 지속적으로 감시합니다. 측정 완료 전 버튼이 잘못 노출되는 깜빡임을 막기 위해 canScroll 초기값을 null로 두었고, null인 동안은 버튼을 숨깁니다. visibility: hidden 대신 display: none을 쓴 이유는, visibility: hidden이 공간을 그대로 차지해 레이아웃이 어긋나기 때문입니다. ProductGallery.tsx(상품 썸네일)와 ReviewSection.tsx(포토 리뷰) 두 곳에 동일하게 적용했습니다.</li>
-                                                <li><strong>모달 패턴</strong><br>상위 요소에 transform이 적용된 경우 position: fixed 자식의 기준점이 부모로 바뀌어 위치가 틀어지는 문제를 막기 위해 createPortal로 모달을 document.body에 직접 마운트합니다. overflow: hidden 적용 전 스크롤바 너비를 측정해 paddingRight로 보정하고, 닫힐 때 복원합니다. Esc 키 닫기는 keydown 이벤트로 처리하고 cleanup에서 removeEventListener합니다.</li>
-                                                <li><strong>드롭다운 공통 패턴</strong><br>드롭다운 바깥을 클릭하거나 Escape 키를 눌렀을 때 닫히도록 mousedown과 keydown 이벤트를 등록하고, useEffect cleanup에서 두 리스너를 모두 제거합니다. 컴포넌트가 사라진 뒤에도 이벤트가 남아있는 문제를 방지하기 위한 처리입니다. ProductFilterBar.tsx와 SortDropdown.tsx에 동일하게 적용했습니다.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="featured-point">
-                                        <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-4">
-                                            <span class="point-number">04</span>
-                                            <span class="point-title">가벼운 상태 관리 - 목적에 맞는 도구 선택</span>
-                                            <span class="point-icon" aria-hidden="true"></span>
-                                        </button>
-                                        <div class="point-body" id="point-body-4">
-                                            <ul>
-                                                <li><strong>장바구니 - Zustand + persist</strong><br>페이지를 이동해도, 새로고침해도 장바구니가 유지되어야 하므로 persist 미들웨어로 localStorage에 저장했습니다. 같은 상품이라도 옵션이 다른 경우를 구분하기 위해 itemKey(productId, optionLabel) 함수로 복합 키를 만들어 항목을 관리합니다. Header의 장바구니 뱃지는 셀렉터로 구독해서, 항목이 변경될 때만 헤더가 리렌더링됩니다.</li>
-                                                <li><strong>UI 상태 - 컴포넌트 로컬 useState</strong><br>검색창 열림 여부, 헤더 스타일, 리뷰 정렬 순서, 포토 리뷰 모달, 공간 핀 활성 ID, 위시리스트 토글은 모두 컴포넌트 로컬 useState로 처리했습니다. 페이지를 벗어나면 초기화되어야 하는 상태이고, 다른 컴포넌트와 공유될 이유가 없기 때문입니다.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="featured-point">
-                                        <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-5">
-                                            <span class="point-number">05</span>
-                                            <span class="point-title">서버/클라이언트 컴포넌트 경계 설계</span>
-                                            <span class="point-icon" aria-hidden="true"></span>
-                                        </button>
-                                        <div class="point-body" id="point-body-5">
-                                            <ul>
-                                                <li><strong>App Router의 기본값은 서버 컴포넌트</strong><br>"use client"를 남발하면 서버 컴포넌트의 이점(HTML 직접 렌더링, 클라이언트 번들 절감)이 사라집니다. 이 프로젝트에서는 브라우저 기능(useState, useEffect, 이벤트 핸들러)이 필요한 컴포넌트에만 "use client"를 선언하고, 나머지는 서버 컴포넌트로 유지했습니다.</li>
-                                                <li><strong>파일 기반 레지스트리를 서버에서 직접 호출</strong><br>상품 상세 페이지(app/products/[id]/page.tsx)와 카테고리 페이지(app/category/[slug]/page.tsx)는 서버 컴포넌트입니다. getProductDetail( ), getByCategory( ) 함수를 페이지 파일 안에서 직접 호출해 데이터를 가져오며, 이 함수들은 외부 API가 아닌 app/lib/products/index.ts의 파일 기반 레지스트리를 조회합니다. 데이터 조회 코드 전체가 서버에서만 실행됩니다.</li>
-                                                <li><strong>결정 사례 - 상품 상세 페이지</strong><br>갤러리 썸네일 스크롤과 이미지 전환(ProductGallery.tsx), 수량 선택과 장바구니 담기(OrderArea.tsx), 리뷰 정렬과 포토 모달(ReviewSection.tsx)은 인터랙션이 있어야 하므로 클라이언트 컴포넌트로 분리했습니다. 상품 이름, 기본 정보, 섹션 콘텐츠처럼 데이터를 그대로 보여주는 부분은 서버 컴포넌트로 남겼습니다.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
                                 </div>
+
+                                <div class="featured-point">
+                                    <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-2">
+                                        <span class="point-number">02</span>
+                                        <span class="point-title">절제된 인터랙션 - "AI스러운" 기본값을 의도적으로 배제</span>
+                                        <span class="point-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <div class="point-body" id="point-body-2">
+                                        <ul>
+                                            <li>AI 도구가 생성하는 UI에는 공통된 패턴이 있습니다. hover시 카드가 이동하고, 그림자가 과하게 설정되고, 이미지가 과하게 확대됩니다. 보는 관점에 따라 이런 효과가 나쁜 것만은 아니지만, 이 프로젝트에서는 CLAUDE.md에 명시하여 그런 패턴들을 의도적으로 배제하고, 절제된 인터랙션을 사용했습니다.</li>
+                                            <li><strong>상품 카드 hover - 이미지 교체</strong><br>hover 시 두 번째 갤러리 이미지로 자연스럽게 전환됩니다. scale 확대나 translateY 이동 없이 opacity 전환만 사용한 이유는, 두 효과가 겹치면 인터랙션이 과하다고 판단했기 때문입니다.</li>
+                                            <li><strong>토글 아이콘 - SVG path 교체</strong><br>공간 큐레이션의 상품 핀이 열릴 때 +가 -로 바뀝니다. AI스러운 CSS rotate 대신 열린 상태와 닫힌 상태의 SVG path 자체를 조건부로 교체합니다. 위를 가리키는 화살표와 아래를 가리키는 화살표 또한 동일한 아이콘을 회전시켜 사용하지 않고, 각각의 SVG를 사용했습니다.</li>
+                                            <li><strong>상세페이지의 영상 - 뷰포트 안에서만 재생</strong><br>IntersectionObserver가 영상 요소의 뷰포트 진입과 이탈을 감지합니다. 진입하면 재생, 이탈하면 일시정지, 다시 진입하면 멈춘 지점부터 이어서 재생됩니다. 사용자 의도 없이 반복 재생되는 영상은 노이즈라고 판단했습니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="featured-point">
+                                    <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-3">
+                                        <span class="point-number">03</span>
+                                        <span class="point-title">재사용 가능한 인터랙션 패턴</span>
+                                        <span class="point-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <div class="point-body" id="point-body-3">
+                                        <ul>
+                                            <li><strong>가로 스크롤 버튼 패턴</strong><br>창 크기가 바뀔 때 스크롤 버튼이 뒤늦게 나타나거나 사라지는 현상을 막기 위해 ResizeObserver가 스크롤 영역 너비를 지속적으로 감시합니다. 측정 완료 전 버튼이 잘못 노출되는 깜빡임을 막기 위해 canScroll 초기값을 null로 두었고, null인 동안은 버튼을 숨깁니다. visibility: hidden 대신 display: none을 쓴 이유는, visibility: hidden이 공간을 그대로 차지해 레이아웃이 어긋나기 때문입니다. ProductGallery.tsx(상품 썸네일)와 ReviewSection.tsx(포토 리뷰) 두 곳에 동일하게 적용했습니다.</li>
+                                            <li><strong>모달 패턴</strong><br>상위 요소에 transform이 적용된 경우 position: fixed 자식의 기준점이 부모로 바뀌어 위치가 틀어지는 문제를 막기 위해 createPortal로 모달을 document.body에 직접 마운트합니다. overflow: hidden 적용 전 스크롤바 너비를 측정해 paddingRight로 보정하고, 닫힐 때 복원합니다. Esc 키 닫기는 keydown 이벤트로 처리하고 cleanup에서 removeEventListener합니다.</li>
+                                            <li><strong>드롭다운 공통 패턴</strong><br>드롭다운 바깥을 클릭하거나 Escape 키를 눌렀을 때 닫히도록 mousedown과 keydown 이벤트를 등록하고, useEffect cleanup에서 두 리스너를 모두 제거합니다. 컴포넌트가 사라진 뒤에도 이벤트가 남아있는 문제를 방지하기 위한 처리입니다. ProductFilterBar.tsx와 SortDropdown.tsx에 동일하게 적용했습니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="featured-point">
+                                    <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-4">
+                                        <span class="point-number">04</span>
+                                        <span class="point-title">가벼운 상태 관리 - 목적에 맞는 도구 선택</span>
+                                        <span class="point-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <div class="point-body" id="point-body-4">
+                                        <ul>
+                                            <li><strong>장바구니 - Zustand + persist</strong><br>페이지를 이동해도, 새로고침해도 장바구니가 유지되어야 하므로 persist 미들웨어로 localStorage에 저장했습니다. 같은 상품이라도 옵션이 다른 경우를 구분하기 위해 itemKey(productId, optionLabel) 함수로 복합 키를 만들어 항목을 관리합니다. Header의 장바구니 뱃지는 셀렉터로 구독해서, 항목이 변경될 때만 헤더가 리렌더링됩니다.</li>
+                                            <li><strong>UI 상태 - 컴포넌트 로컬 useState</strong><br>검색창 열림 여부, 헤더 스타일, 리뷰 정렬 순서, 포토 리뷰 모달, 공간 핀 활성 ID, 위시리스트 토글은 모두 컴포넌트 로컬 useState로 처리했습니다. 페이지를 벗어나면 초기화되어야 하는 상태이고, 다른 컴포넌트와 공유될 이유가 없기 때문입니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="featured-point">
+                                    <button class="point-toggle" type="button" aria-expanded="false" aria-controls="point-body-5">
+                                        <span class="point-number">05</span>
+                                        <span class="point-title">서버/클라이언트 컴포넌트 경계 설계</span>
+                                        <span class="point-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <div class="point-body" id="point-body-5">
+                                        <ul>
+                                            <li><strong>App Router의 기본값은 서버 컴포넌트</strong><br>"use client"를 남발하면 서버 컴포넌트의 이점(HTML 직접 렌더링, 클라이언트 번들 절감)이 사라집니다. 이 프로젝트에서는 브라우저 기능(useState, useEffect, 이벤트 핸들러)이 필요한 컴포넌트에만 "use client"를 선언하고, 나머지는 서버 컴포넌트로 유지했습니다.</li>
+                                            <li><strong>파일 기반 레지스트리를 서버에서 직접 호출</strong><br>상품 상세 페이지(app/products/[id]/page.tsx)와 카테고리 페이지(app/category/[slug]/page.tsx)는 서버 컴포넌트입니다. getProductDetail( ), getByCategory( ) 함수를 페이지 파일 안에서 직접 호출해 데이터를 가져오며, 이 함수들은 외부 API가 아닌 app/lib/products/index.ts의 파일 기반 레지스트리를 조회합니다. 데이터 조회 코드 전체가 서버에서만 실행됩니다.</li>
+                                            <li><strong>결정 사례 - 상품 상세 페이지</strong><br>갤러리 썸네일 스크롤과 이미지 전환(ProductGallery.tsx), 수량 선택과 장바구니 담기(OrderArea.tsx), 리뷰 정렬과 포토 모달(ReviewSection.tsx)은 인터랙션이 있어야 하므로 클라이언트 컴포넌트로 분리했습니다. 상품 이름, 기본 정보, 섹션 콘텐츠처럼 데이터를 그대로 보여주는 부분은 서버 컴포넌트로 남겼습니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

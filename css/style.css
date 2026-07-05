@@ -72,7 +72,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
   background-size: 600px 600px; }
 .featured-section .centerbox { padding: 150px 0; }
 .featured-section .featured-centerbox { padding: 0; }
-.featured-points-section { position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh; display: flex; align-items: center; z-index: 4; pointer-events: auto; background: #F3F0E9; background-image: linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px); background-size: 600px 600px; transform: translateY(100vh); }
+.featured-points-section { width: 100%; padding: 120px 0; background: #F3F0E9; background-image: linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px); background-size: 600px 600px; }
 
 .portfolio-intro { height: 100vh; display: flex; align-items: center; background: #F3F0E9; position: relative; z-index: 1; }
 .portfolio-intro h2 { font-size: clamp(60px, 9vw, 180px); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; }

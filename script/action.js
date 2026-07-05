@@ -182,17 +182,47 @@ document.querySelectorAll('.featured-compare figure').forEach(figure => {
 
 // Featured Project 아코디언
 const featuredToggles = document.querySelectorAll('.featured-point .point-toggle');
+const featuredPointsList = document.querySelector('.featured-points');
+const featuredFirstPointBody = document.getElementById('point-body-1');
+const FEATURED_SAFE_HEIGHT_RATIO = 0.85;
+let featuredFirstPointUserTouched = false;
 
-if (window.innerWidth < 768) {
-    featuredToggles[0]?.setAttribute('aria-expanded', 'false');
+// point 1이 열렸을 때 아코디언 리스트 높이가 뷰포트를 과하게 초과하면 자동으로 닫는다 (사용자가 직접 토글하기 전까지만 적용)
+// aria-expanded를 임시로 바꿔서 재는 방식은 grid-template-rows transition 때문에 직후 read가 이전 값을 반환해 신뢰할 수 없으므로,
+// transition에 영향받지 않는 scrollHeight로 "열렸을 때 높이"를 계산한다.
+function evaluateFeaturedFirstPoint() {
+    const firstToggle = featuredToggles[0];
+    if (featuredFirstPointUserTouched || !firstToggle || !featuredPointsList || !featuredFirstPointBody) return;
+
+    const wasOpen = firstToggle.getAttribute('aria-expanded') === 'true';
+    const openHeight = wasOpen
+        ? featuredPointsList.offsetHeight
+        : featuredPointsList.offsetHeight + featuredFirstPointBody.scrollHeight;
+    const fits = openHeight <= window.innerHeight * FEATURED_SAFE_HEIGHT_RATIO;
+    firstToggle.setAttribute('aria-expanded', String(fits));
 }
+
+evaluateFeaturedFirstPoint();
+document.fonts.ready.then(evaluateFeaturedFirstPoint);
 
 featuredToggles.forEach(toggle => {
     toggle.addEventListener('click', function () {
+        featuredFirstPointUserTouched = true;
         const isOpen = this.getAttribute('aria-expanded') === 'true';
         featuredToggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
         this.setAttribute('aria-expanded', String(!isOpen));
     });
+});
+
+let featuredResizeWidth = window.innerWidth;
+let featuredResizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(featuredResizeTimer);
+    featuredResizeTimer = setTimeout(() => {
+        if (window.innerWidth === featuredResizeWidth) return;
+        featuredResizeWidth = window.innerWidth;
+        evaluateFeaturedFirstPoint();
+    }, 250);
 });
 
 // Document Ready
