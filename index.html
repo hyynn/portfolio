@@ -65,7 +65,7 @@
                             </div>
                             <div class="profile-card">
                                 <div class="photo">
-                                    <img src="images/hee1.png" alt="프로필사진">
+                                    <img src="images/profile-photo.png" alt="프로필사진">
                                 </div>
                                 <div class="profile-meta">
                                     <p class="profile-name">나세희</p>
@@ -275,14 +275,14 @@
                                     <div class="compare-item">
                                         <span class="compare-label">BEFORE <em>한샘 공식몰</em></span>
                                         <figure>
-                                            <img src="images/hanssem-before-main.png" alt="한샘 공식몰 기존 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
+                                            <img src="images/hanssem-before-main.webp" alt="한샘 공식몰 기존 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
                                         </figure>
                                     </div>
                                     <span class="compare-vs">VS</span>
                                     <div class="compare-item">
                                         <span class="compare-label">AFTER <em>리디자인</em></span>
                                         <figure>
-                                            <img src="images/hanssem-after-main.png" alt="한샘 공식몰 리디자인 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
+                                            <img src="images/hanssem-after-main.webp" alt="한샘 공식몰 리디자인 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
                                         </figure>
                                     </div>
                                 </div>
@@ -308,14 +308,14 @@
                                     <div class="compare-item">
                                         <span class="compare-label">BEFORE <em>한샘 공식몰</em></span>
                                         <figure>
-                                            <img src="images/hanssem-before-category.png" alt="한샘 공식몰 카테고리 기존 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
+                                            <img src="images/hanssem-before-category.webp" alt="한샘 공식몰 카테고리 기존 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
                                         </figure>
                                     </div>
                                     <span class="compare-vs">VS</span>
                                     <div class="compare-item">
                                         <span class="compare-label">AFTER <em>리디자인</em></span>
                                         <figure>
-                                            <img src="images/hanssem-after-category.png" alt="한샘 공식몰 카테고리 리디자인 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
+                                            <img src="images/hanssem-after-category.webp" alt="한샘 공식몰 카테고리 리디자인 화면" loading="lazy" onerror="this.closest('figure').classList.add('img-missing')">
                                         </figure>
                                     </div>
                                 </div>
@@ -396,7 +396,7 @@
                                             <ul>
                                                 <li><strong>App Router의 기본값은 서버 컴포넌트</strong><br>"use client"를 남발하면 서버 컴포넌트의 이점(HTML 직접 렌더링, 클라이언트 번들 절감)이 사라집니다. 이 프로젝트에서는 브라우저 기능(useState, useEffect, 이벤트 핸들러)이 필요한 컴포넌트에만 "use client"를 선언하고, 나머지는 서버 컴포넌트로 유지했습니다.</li>
                                                 <li><strong>파일 기반 레지스트리를 서버에서 직접 호출</strong><br>상품 상세 페이지(app/products/[id]/page.tsx)와 카테고리 페이지(app/category/[slug]/page.tsx)는 서버 컴포넌트입니다. getProductDetail( ), getByCategory( ) 함수를 페이지 파일 안에서 직접 호출해 데이터를 가져오며, 이 함수들은 외부 API가 아닌 app/lib/products/index.ts의 파일 기반 레지스트리를 조회합니다. 데이터 조회 코드 전체가 서버에서만 실행됩니다.</li>
-                                                <li><strong>경계 판단 사례 - 상품 상세 페이지</strong><br>갤러리 썸네일 스크롤과 이미지 전환(ProductGallery.tsx), 수량 선택과 장바구니 담기(OrderArea.tsx), 리뷰 정렬과 포토 모달(ReviewSection.tsx)은 인터랙션이 있어야 하므로 클라이언트 컴포넌트로 분리했습니다. 상품 이름, 기본 정보, 섹션 콘텐츠처럼 데이터를 그대로 보여주는 부분은 서버 컴포넌트로 남겼습니다.</li>
+                                                <li><strong>결정 사례 - 상품 상세 페이지</strong><br>갤러리 썸네일 스크롤과 이미지 전환(ProductGallery.tsx), 수량 선택과 장바구니 담기(OrderArea.tsx), 리뷰 정렬과 포토 모달(ReviewSection.tsx)은 인터랙션이 있어야 하므로 클라이언트 컴포넌트로 분리했습니다. 상품 이름, 기본 정보, 섹션 콘텐츠처럼 데이터를 그대로 보여주는 부분은 서버 컴포넌트로 남겼습니다.</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -460,16 +460,16 @@
                                 </div>
                             </div>
                             <div class="visualbox">
-                                <figure><img src="images/computer.png" alt=""></figure>
-                                <div class="screen"><img src="images/sub01/main.png" alt="유어럿 메인 화면"></div>
+                                <figure><img src="images/computer.webp" alt=""></figure>
+                                <div class="screen"><img src="images/sub01/main.webp" alt="유어럿 메인 화면"></div>
                             </div>
                         </div>
                     </section>
                     <section class="sectionbox section2 part">
                         <div class="centerbox" id="section02">
                             <div class="visualbox">
-                                <figure><img src="images/computer.png" alt=""></figure>
-                                <div class="screen"><img src="images/sub02/main.png" alt="Coremed 메인 화면"></div>
+                                <figure><img src="images/computer.webp" alt=""></figure>
+                                <div class="screen"><img src="images/sub02/main.webp" alt="Coremed 메인 화면"></div>
                             </div>
                             <div class="textbox">
                                 <h2><span>02.</span>Coremed</h2>
@@ -564,8 +564,8 @@
                                 </div>
                             </div>
                             <div class="visualbox">
-                                <figure><img src="images/computer.png" alt=""></figure>
-                                <div class="screen"><img src="images/sub03/main.png" alt="Entro 메인 화면">
+                                <figure><img src="images/computer.webp" alt=""></figure>
+                                <div class="screen"><img src="images/sub03/main.webp" alt="Entro 메인 화면">
                                 </div>
                             </div>
                         </div>
@@ -573,8 +573,8 @@
                     <section class="sectionbox section4 part">
                         <div class="centerbox" id="section04">
                             <div class="visualbox">
-                                <figure><img src="images/computer.png" alt=""></figure>
-                                <div class="screen"><img src="images/sub04/main.png" alt="Essential Studio 메인 화면"></div>
+                                <figure><img src="images/computer.webp" alt=""></figure>
+                                <div class="screen"><img src="images/sub04/main.webp" alt="Essential Studio 메인 화면"></div>
                             </div>
                             <div class="textbox">
                                 <h2><span>04.</span>Essential Studio</h2>
@@ -662,16 +662,16 @@
                             </div>
                             <div class="mobilebox">
                                 <div class="visualbox2 vis1">
-                                    <figure><img src="images/phone.png" alt="" aria-hidden="true"></figure>
-                                    <div class="screen"><img src="images/sub05/main.png" alt="CFM 메인 화면"></div>
+                                    <figure><img src="images/phone.webp" alt="" aria-hidden="true"></figure>
+                                    <div class="screen"><img src="images/sub05/main.webp" alt="CFM 메인 화면"></div>
                                 </div>
                                 <div class="visualbox2 vis2">
-                                    <figure><img src="images/phone.png" alt="" aria-hidden="true"></figure>
-                                    <div class="screen"><img src="images/sub05/sub2-visual.png" alt="CFM 즐겨찾기 화면"></div>
+                                    <figure><img src="images/phone.webp" alt="" aria-hidden="true"></figure>
+                                    <div class="screen"><img src="images/sub05/sub2-visual.webp" alt="CFM 즐겨찾기 화면"></div>
                                 </div>
                                 <div class="visualbox2 vis3">
-                                    <figure><img src="images/phone.png" alt="" aria-hidden="true"></figure>
-                                    <div class="screen"><img src="images/sub05/sub1-visual.png" alt="CFM 검색 화면"></div>
+                                    <figure><img src="images/phone.webp" alt="" aria-hidden="true"></figure>
+                                    <div class="screen"><img src="images/sub05/sub1-visual.webp" alt="CFM 검색 화면"></div>
                                 </div>
                             </div>
                         </div>
@@ -688,14 +688,14 @@
                                 <div class="popup-fold-align">
                                     <div class="popup-fold-content">
                                         <div class="popup-images">
-                                            <img src="images/popup01.png" alt="">
-                                            <img src="images/popup02.png" alt="">
-                                            <img src="images/popup03.png" alt="">
-                                            <img src="images/popup04.png" alt="">
-                                            <img src="images/popup05.png" alt="">
-                                            <img src="images/popup06.png" alt="">
-                                            <img src="images/popup07.png" alt="">
-                                            <img src="images/popup08.png" alt="">
+                                            <img src="images/popup01.webp" alt="">
+                                            <img src="images/popup02.webp" alt="">
+                                            <img src="images/popup03.webp" alt="">
+                                            <img src="images/popup04.webp" alt="">
+                                            <img src="images/popup05.webp" alt="">
+                                            <img src="images/popup06.webp" alt="">
+                                            <img src="images/popup07.webp" alt="">
+                                            <img src="images/popup08.webp" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -705,14 +705,14 @@
                                     <div id="popup-center-content" class="popup-fold-content">
 
                                         <div class="popup-images">
-                                            <img src="images/popup01.png" alt="팝업/포스터 디자인 01">
-                                            <img src="images/popup02.png" alt="팝업/포스터 디자인 02">
-                                            <img src="images/popup03.png" alt="팝업/포스터 디자인 03">
-                                            <img src="images/popup04.png" alt="팝업/포스터 디자인 04">
-                                            <img src="images/popup05.png" alt="팝업/포스터 디자인 05">
-                                            <img src="images/popup06.png" alt="팝업/포스터 디자인 06">
-                                            <img src="images/popup07.png" alt="팝업/포스터 디자인 07">
-                                            <img src="images/popup08.png" alt="팝업/포스터 디자인 08">
+                                            <img src="images/popup01.webp" alt="팝업/포스터 디자인 01">
+                                            <img src="images/popup02.webp" alt="팝업/포스터 디자인 02">
+                                            <img src="images/popup03.webp" alt="팝업/포스터 디자인 03">
+                                            <img src="images/popup04.webp" alt="팝업/포스터 디자인 04">
+                                            <img src="images/popup05.webp" alt="팝업/포스터 디자인 05">
+                                            <img src="images/popup06.webp" alt="팝업/포스터 디자인 06">
+                                            <img src="images/popup07.webp" alt="팝업/포스터 디자인 07">
+                                            <img src="images/popup08.webp" alt="팝업/포스터 디자인 08">
                                         </div>
                                     </div>
                                 </div>
@@ -721,14 +721,14 @@
                                 <div class="popup-fold-align">
                                     <div class="popup-fold-content">
                                         <div class="popup-images">
-                                            <img src="images/popup01.png" alt="">
-                                            <img src="images/popup02.png" alt="">
-                                            <img src="images/popup03.png" alt="">
-                                            <img src="images/popup04.png" alt="">
-                                            <img src="images/popup05.png" alt="">
-                                            <img src="images/popup06.png" alt="">
-                                            <img src="images/popup07.png" alt="">
-                                            <img src="images/popup08.png" alt="">
+                                            <img src="images/popup01.webp" alt="">
+                                            <img src="images/popup02.webp" alt="">
+                                            <img src="images/popup03.webp" alt="">
+                                            <img src="images/popup04.webp" alt="">
+                                            <img src="images/popup05.webp" alt="">
+                                            <img src="images/popup06.webp" alt="">
+                                            <img src="images/popup07.webp" alt="">
+                                            <img src="images/popup08.webp" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -741,11 +741,11 @@
                         <h2 class="banner-title">Banner</h2>
                         <div class="banner-slider">
                             <div class="banner-slider-list">
-                                <div class="banner-card"><img src="images/banner01.png" alt="배너 디자인 01"></div>
-                                <div class="banner-card"><img src="images/banner02.png" alt="배너 디자인 02"></div>
-                                <div class="banner-card"><img src="images/banner03.png" alt="배너 디자인 03"></div>
-                                <div class="banner-card"><img src="images/banner04.png" alt="배너 디자인 04"></div>
-                                <div class="banner-card"><img src="images/banner05.png" alt="배너 디자인 05"></div>
+                                <div class="banner-card"><img src="images/banner01.webp" alt="배너 디자인 01"></div>
+                                <div class="banner-card"><img src="images/banner02.webp" alt="배너 디자인 02"></div>
+                                <div class="banner-card"><img src="images/banner03.webp" alt="배너 디자인 03"></div>
+                                <div class="banner-card"><img src="images/banner04.webp" alt="배너 디자인 04"></div>
+                                <div class="banner-card"><img src="images/banner05.webp" alt="배너 디자인 05"></div>
                             </div>
                         </div>
                     </div>
