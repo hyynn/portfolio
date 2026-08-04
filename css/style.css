@@ -64,9 +64,9 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
 
 /* How I Work — 작업 과정 소개 영상 */
 .process-section { height: 100vh; display: flex; align-items: center; background: #F3F0E9; position: relative; z-index: 1; }
-.process-section .centerbox { padding: 0; display: flex; flex-direction: column; align-items: center; gap: 30px; }
-.process-section h2 { font-weight: normal; font-size: clamp(28px, 4.2vw, 80px); line-height: 1; text-align: center; margin: 0; }
-.process-video { position: relative; width: min(1100px, 85vw, calc(60vh * 16 / 9)); aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #211f17; }
+.process-section .centerbox { padding: 0; display: flex; flex-direction: column; align-items: center;}
+.process-section h2 { font-weight: normal; font-size: clamp(28px, 4.2vw, 80px); line-height: 1; text-align: center; margin: 0; margin-bottom: 60px; }
+.process-video { position: relative; width: min(1210px, 85vw, calc(66vh * 16 / 9)); aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #211f17; }
 .process-video video { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 .process-controls { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 16px; padding: 30px 16px 14px; background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); opacity: 0; transition: opacity 0.2s ease; z-index: 2; }
 .process-video:hover .process-controls, .process-controls:focus-within { opacity: 1; }
@@ -456,7 +456,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .profile-section .profile-meta { grid-template-columns: 0.6fr 1.4fr; } 
  .profile-section .profile-grid { gap: 20px; } 
  .profile-section .profile-layout { gap: 20px 80px; } 
- .works-section h2 { margin-bottom: 40px; } 
+ .works-section h2, .process-section h2 { margin-bottom: 40px; } 
  .works-section .works-card { padding-top: 20px; gap: 10px; } 
  .works-section .works-label { margin-bottom: 20px; } 
  .sectionbox .visualbox .screen { height: 318px; top: 9px; border-radius: 7px; } 
@@ -546,7 +546,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .description-box { width: 60%; } 
  .profile-section .profile-layout { gap: 20px 20px; } 
  .profile-section .profile-grid { grid-template-columns: 1fr 1fr; } 
- .works-section h2 { margin-bottom: 40px; } 
+ .works-section h2, .process-section h2 { margin-bottom: 30px; } 
  .works-section .works-body { gap: 40px; } 
  .sectionbox .textbox .detail { gap: 6px; margin-top: 20px; } 
  .popup-label { left: 20px; top: 20px; transform: none; } 
@@ -562,7 +562,7 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
 
  @media (max-width: 600px) { 
  .centerbox, .poster-container { width: 500px; } 
- .works-section h2 { margin-bottom: 20px; } 
+ .works-section h2, .process-section h2 { margin-bottom: 20px; } 
  .description-box { width: 70%; } 
  .profile-section .profile-intro p { margin-bottom: 10px; } 
  .profile-section .photo { width: 180px; } 
