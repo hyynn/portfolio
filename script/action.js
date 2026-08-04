@@ -283,4 +283,117 @@ if (scrollTopBtn) {
     }
 }
 
+/* How I Work 영상: 화면 진입 시 자동재생(음소거), 이탈 시 정지+음소거. 소리는 사용자가 버튼을 눌러야만 켜짐(브라우저 자동재생 정책상 스크립트로 강제 언뮤트하면 재생이 막히므로 실제 클릭으로만 언뮤트) */
+const processVideo = document.querySelector('.process-video-el');
+if (processVideo) {
+    processVideo.volume = 0.2;
+
+    const processPlayBtn = document.querySelector('.process-play-btn');
+    const processMuteBtn = document.querySelector('.process-mute-btn');
+    const processVolumeSlider = document.querySelector('.process-volume');
+    const processProgress = document.querySelector('.process-progress');
+    const iconPlay = processPlayBtn.querySelector('.icon-play');
+    const iconPause = processPlayBtn.querySelector('.icon-pause');
+    const iconVolumeOn = processMuteBtn.querySelector('.icon-volume-on');
+    const iconVolumeOff = processMuteBtn.querySelector('.icon-volume-off');
+
+    let processVideoInView = false;
+    let processUserPaused = false; // 사용자가 버튼으로 직접 일시정지했는지
+    let processUserUnmuted = false; // 사용자가 버튼/슬라이더로 소리를 켠 적 있는지
+
+    function updateProcessControls() {
+        const playing = !processVideo.paused && !processVideo.ended;
+        iconPlay.classList.toggle('hidden', playing);
+        iconPause.classList.toggle('hidden', !playing);
+
+        const isMuted = processVideo.muted || processVideo.volume === 0;
+        iconVolumeOn.classList.toggle('hidden', isMuted);
+        iconVolumeOff.classList.toggle('hidden', !isMuted);
+        processVolumeSlider.value = isMuted ? 0 : processVideo.volume;
+    }
+    ['play', 'pause', 'ended', 'volumechange'].forEach(ev => processVideo.addEventListener(ev, updateProcessControls));
+    updateProcessControls();
+
+    function tryPlayProcessVideo() {
+        processVideo.play().catch(() => {});
+    }
+
+    // 최초 진입 시 아직 버퍼링이 덜 된 상태에서 play()가 조용히 실패하면 canplay 시점에 재시도
+    processVideo.addEventListener('canplay', () => {
+        if (processVideoInView && !processUserPaused && processVideo.paused && !processVideo.ended) {
+            tryPlayProcessVideo();
+        }
+    });
+
+    new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            processVideoInView = entry.isIntersecting;
+            if (entry.isIntersecting) {
+                processVideo.muted = !processUserUnmuted;
+                if (!processUserPaused && !processVideo.ended) tryPlayProcessVideo();
+            } else {
+                processVideo.muted = true; // 화면 밖에서는 항상 무음
+                processVideo.pause();
+            }
+        });
+    }, { threshold: 0.5 }).observe(processVideo);
+
+    function toggleProcessPlay() {
+        if (processVideo.paused || processVideo.ended) {
+            processUserPaused = false;
+            if (processVideo.ended) processVideo.currentTime = 0;
+            tryPlayProcessVideo();
+        } else {
+            processUserPaused = true;
+            processVideo.pause();
+        }
+    }
+    processPlayBtn.addEventListener('click', toggleProcessPlay);
+    processVideo.addEventListener('click', toggleProcessPlay); // 영상 어느 부분을 클릭해도 토글
+
+    processMuteBtn.addEventListener('click', () => {
+        const isMuted = processVideo.muted || processVideo.volume === 0;
+        if (isMuted) {
+            processUserUnmuted = true;
+            processVideo.muted = false;
+            if (processVideo.volume === 0) processVideo.volume = 0.2;
+        } else {
+            processUserUnmuted = false;
+            processVideo.muted = true;
+        }
+    });
+
+    processVolumeSlider.addEventListener('input', () => {
+        const vol = parseFloat(processVolumeSlider.value);
+        processVideo.volume = vol;
+        processVideo.muted = vol === 0;
+        processUserUnmuted = vol > 0;
+    });
+
+    // 재생 위치 스크러버
+    let processSeeking = false;
+
+    function setProcessProgressFill(percent) {
+        processProgress.style.background = `linear-gradient(to right, #fff ${percent}%, rgba(255, 255, 255, 0.35) ${percent}%)`;
+    }
+
+    function updateProcessProgress() {
+        if (processSeeking || !processVideo.duration) return;
+        const percent = (processVideo.currentTime / processVideo.duration) * 100;
+        processProgress.value = percent;
+        setProcessProgressFill(percent);
+    }
+    processVideo.addEventListener('timeupdate', updateProcessProgress);
+    processVideo.addEventListener('loadedmetadata', updateProcessProgress);
+
+    processProgress.addEventListener('pointerdown', () => { processSeeking = true; });
+    processProgress.addEventListener('pointerup', () => { processSeeking = false; });
+    processProgress.addEventListener('input', () => {
+        setProcessProgressFill(processProgress.value);
+        if (processVideo.duration) {
+            processVideo.currentTime = (processProgress.value / 100) * processVideo.duration;
+        }
+    });
+}
+
 

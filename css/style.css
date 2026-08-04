@@ -62,6 +62,24 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
 .works-section .works-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 10px; } 
 .works-section .works-tag { border: 1px solid #999; padding: 4px 10px; border-radius: 6px; font-size: clamp(12px, 0.73vw, 14px); color: #505050; }
 
+/* How I Work — 작업 과정 소개 영상 */
+.process-section { height: 100vh; display: flex; align-items: center; background: #F3F0E9; position: relative; z-index: 1; }
+.process-section .centerbox { padding: 0; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+.process-section h2 { font-weight: normal; font-size: clamp(28px, 4.2vw, 80px); line-height: 1; text-align: center; margin: 0; }
+.process-video { position: relative; width: min(1100px, 85vw, calc(60vh * 16 / 9)); aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #211f17; }
+.process-video video { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+.process-controls { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 16px; padding: 30px 16px 14px; background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)); opacity: 0; transition: opacity 0.2s ease; z-index: 2; }
+.process-video:hover .process-controls, .process-controls:focus-within { opacity: 1; }
+.process-right-group { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.process-btn { width: 32px; height: 32px; border: none; border-radius: 50%; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; flex-shrink: 0; }
+.process-btn:hover { background: rgba(255, 255, 255, 0.15); }
+.process-btn svg.hidden { display: none; }
+.process-progress { flex: 1; height: 4px; border-radius: 2px; -webkit-appearance: none; appearance: none; background: rgba(255, 255, 255, 0.35); cursor: pointer; outline: none; }
+.process-progress::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; cursor: pointer; }
+.process-progress::-moz-range-thumb { width: 12px; height: 12px; border: none; border-radius: 50%; background: #fff; cursor: pointer; }
+.process-progress::-moz-range-progress { background: #fff; height: 4px; border-radius: 2px; }
+.process-volume { width: 70px; height: 4px; accent-color: #fff; cursor: pointer; }
+
 .featured-curtain { position: relative; width: 100%; height: 100vh; pointer-events: auto; }
 
 /* Featured Project */

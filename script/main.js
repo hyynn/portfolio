@@ -179,6 +179,19 @@ gsap.timeline({
         opacity: 0, filter: "blur(8px)", duration: 1.0, stagger: 0.2, ease: "power2.out"
     }, "+=0.3")
 
+// process (How I Work) — 타이틀은 고정, 비디오만 중앙에서 확대되며 등장
+gsap.timeline({
+    scrollTrigger: {
+        trigger: ".process-section",
+        start: "top 60%",
+        end: "top 10%",
+        scrub: true,
+    }
+})
+    .from(".process-video", {
+        opacity: 0, scale: 0.6, filter: "blur(8px)", duration: 1.0, ease: "power2.out"
+    })
+
 // featured project intro - featured-curtain을 고정한 채 레이어들이 차례로 위로 올라와 덮는 커튼 리빌
 // featured-points-section은 pin 밖 일반 문서 흐름으로 이어지므로(카드 리빌 대상 아님) 이 타임라인에 포함하지 않는다.
 gsap.timeline({
