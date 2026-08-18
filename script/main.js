@@ -1,6 +1,6 @@
 /* main.js — index(메인) 전용 GSAP 애니메이션. 서브페이지에서는 로드하지 않음. */
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable, InertiaPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable, InertiaPlugin, Observer);
 
 // ScrollSmoother - 터치 디바이스 제외
 if (!('ontouchstart' in window)) {
@@ -318,62 +318,115 @@ document.fonts.ready.then(() => {
     initThankyouAnim();
 });
 
-// banner
+// banner - 가로로 긴 3D 원통(드럼)이 스크롤에 따라 카드 한 장씩 회전하며 넘어가는 인터랙션
 let initCards = null;
 
+const bannerSlider = document.querySelector('.banner-slider');
+const bannerCylinder = document.querySelector('.banner-cylinder');
 const bannerCards = gsap.utils.toArray('.banner-card');
-if (bannerCards.length > 0) {
-    const getCardHeight = () => bannerCards[0].offsetHeight;
 
-    initCards = () => {
-        const cardH = getCardHeight();
-        const gap = cardH * 1.8;
-        const spacing = cardH + gap;
+if (bannerSlider && bannerCylinder && bannerCards.length > 0) {
+    const cardCount = bannerCards.length;
+    const angleStep = 360 / cardCount; // 카드 사이 회전 각도
+    let radius = 0;
+    let currentRotation = 0;
+
+    // 배너 이미지 비율(1200:300 = 4:1)에 맞춰 원통 크기를 컨테이너 폭 기준으로 계산
+    const layoutCylinder = () => {
+        const width = bannerSlider.offsetWidth;
+        const cardH = width / 4;
+        radius = (cardH / 2) / Math.tan((angleStep / 2) * Math.PI / 180);
+
+        bannerSlider.style.perspective = (width * 1.2) + 'px';
+        bannerSlider.style.height = (cardH + radius) + 'px'; // 카드가 위아래로 회전할 여유 공간을 슬라이더 안에 확보해 타이틀과 겹치지 않게 함
+        bannerCylinder.style.height = cardH + 'px';
+    };
+
+    const renderCylinder = (rotation) => {
+        currentRotation = rotation;
         bannerCards.forEach((card, i) => {
+            // rotation이 커질수록 앞 카드가 위로 빠지고 다음 카드가 아래에서 올라오도록 부호 반전
+            let angle = (rotation - i * angleStep) % 360;
+            if (angle > 180) angle -= 360;
+            if (angle < -180) angle += 360;
+
             gsap.set(card, {
-                position: 'absolute', top: 0, left: 0, width: '100%',
-                y: i * spacing,
-                zIndex: bannerCards.length - i
+                rotationX: angle,
+                transformOrigin: `50% 50% -${radius}px`,
+                opacity: gsap.utils.clamp(0, 1, 1 - Math.abs(angle) / 90),
+                pointerEvents: Math.abs(angle) < angleStep / 2 ? 'auto' : 'none'
             });
         });
     };
-    initCards();
+
+    let activeIndex = 0;
+    let isStepping = false;
+
+    // 스크롤 거리에 progress를 매핑하지 않고, 한 스텝(휠/스와이프 1회)마다 카드 한 장을 빠르게 회전시켜 정중앙에 세움
+    const goToIndex = (nextIndex) => {
+        isStepping = true;
+        activeIndex = nextIndex;
+        gsap.to({ v: currentRotation }, {
+            v: activeIndex * angleStep,
+            duration: 0.5,
+            ease: 'power2.inOut',
+            onUpdate: function () { renderCylinder(this.targets()[0].v); },
+            onComplete: () => { setTimeout(() => { isStepping = false; }, 180); }
+        });
+    };
+
+    initCards = () => {
+        layoutCylinder();
+        renderCylinder(activeIndex * angleStep);
+    };
+    layoutCylinder();
+    renderCylinder(0);
+
+    // 직접 만든 wheel/touch 트래핑은 ScrollSmoother(smooth:2)의 관성 재생과 계속 레이스가 나서
+    // pin에 들어와 있는 동안만 스무더를 멈추고, GSAP Observer로 "제스처 1회 = 카드 1스텝"을 맡김
+    const smoother = typeof ScrollSmoother !== 'undefined' ? ScrollSmoother.get() : null;
+    const pauseSmoother = () => smoother && smoother.paused(true);
+    const resumeSmoother = () => smoother && smoother.paused(false);
+
+    // next가 범위를 벗어나면 스텝을 밟지 않고 false를 반환 → 호출부에서 Observer를 해제해 자연 스크롤로 넘김
+    const stepTo = (nextIndex) => {
+        if (nextIndex < 0 || nextIndex > cardCount - 1) return false;
+        goToIndex(nextIndex);
+        return true;
+    };
+
+    let bannerObserver = null;
+
+    const createBannerObserver = () => {
+        if (bannerObserver) return;
+        bannerObserver = Observer.create({
+            target: window,
+            type: 'wheel,touch,pointer',
+            preventDefault: true,
+            tolerance: 10,
+            onDown: () => { if (!isStepping && !stepTo(activeIndex + 1)) destroyBannerObserver(); },
+            onUp: () => { if (!isStepping && !stepTo(activeIndex - 1)) destroyBannerObserver(); }
+        });
+    };
+
+    const destroyBannerObserver = () => {
+        if (!bannerObserver) return;
+        bannerObserver.kill();
+        bannerObserver = null;
+        resumeSmoother();
+    };
 
     ScrollTrigger.create({
         trigger: '.banner',
         start: 'top top',
-        end: () => {
-            const cardH = getCardHeight();
-            const gap = cardH * 1.8;
-            return '+=' + (bannerCards.length - 1) * (cardH + gap) * 0.8;
-        },
+        end: '+=100', // 실제 스크롤 거리로 쓰이지 않는 안전 버퍼일 뿐, 값 자체는 중요하지 않음
         pin: true,
-        scrub: 1,
         invalidateOnRefresh: true,
-        onUpdate: (self) => {
-            const cardH = getCardHeight();
-            const gap = cardH * 1.8;
-            const spacing = cardH + gap;
-            const totalMoveDist = (bannerCards.length - 1) * spacing;
-            const currentScrollMove = self.progress * totalMoveDist;
-
-            bannerCards.forEach((card, i) => {
-                const yPos = (i * spacing) - currentScrollMove;
-                const isEven = i % 2 === 0;
-
-                const rotationVal = yPos > 0
-                    ? (yPos / (cardH * 3)) * (isEven ? 6 : -6)
-                    : yPos < 0
-                        ? (yPos / window.innerHeight) * (isEven ? 15 : -15)
-                        : 0;
-
-                gsap.set(card, {
-                    y: yPos,
-                    rotation: rotationVal,
-                    transformOrigin: isEven ? 'right top' : 'left top'
-                });
-            });
-        }
+        onRefresh: layoutCylinder,
+        onEnter: () => { pauseSmoother(); createBannerObserver(); },
+        onEnterBack: () => { pauseSmoother(); createBannerObserver(); },
+        onLeave: destroyBannerObserver,
+        onLeaveBack: destroyBannerObserver
     });
 }
 
