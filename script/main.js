@@ -2,6 +2,9 @@
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable, InertiaPlugin, Observer);
 
+// 모바일 주소창 표시/숨김에 따른 뷰포트 높이 변화로 pin 좌표가 흔들리는 것을 방지
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 // ScrollSmoother - 터치 디바이스 제외
 if (!('ontouchstart' in window)) {
     ScrollSmoother.create({
@@ -387,52 +390,77 @@ if (bannerSlider && bannerViewport && bannerCylinder && bannerCards.length > 0) 
     layoutCylinder();
     renderCylinder(0);
 
-    // 직접 만든 wheel/touch 트래핑은 ScrollSmoother(smooth:2)의 관성 재생과 계속 레이스가 나서
-    // pin에 들어와 있는 동안만 스무더를 멈추고, GSAP Observer로 "제스처 1회 = 카드 1스텝"을 맡김
-    const smoother = typeof ScrollSmoother !== 'undefined' ? ScrollSmoother.get() : null;
-    const pauseSmoother = () => smoother && smoother.paused(true);
-    const resumeSmoother = () => smoother && smoother.paused(false);
-
-    // next가 범위를 벗어나면 스텝을 밟지 않고 false를 반환 → 호출부에서 Observer를 해제해 자연 스크롤로 넘김
-    const stepTo = (nextIndex) => {
-        if (nextIndex < 0 || nextIndex > cardCount - 1) return false;
-        goToIndex(nextIndex);
-        return true;
-    };
-
-    let bannerObserver = null;
-
-    const createBannerObserver = () => {
-        if (bannerObserver) return;
-        bannerObserver = Observer.create({
-            target: window,
-            type: 'wheel,touch,pointer',
-            preventDefault: true,
-            tolerance: 10,
-            onDown: () => { if (!isStepping && !stepTo(activeIndex + 1)) destroyBannerObserver(); },
-            onUp: () => { if (!isStepping && !stepTo(activeIndex - 1)) destroyBannerObserver(); }
+    if ('ontouchstart' in window) {
+        // 모바일: touchmove.preventDefault()로 네이티브 스크롤을 완전히 가두는 게 iOS 등에서
+        // 신뢰할 수 없어서(제스처를 스크롤로 이미 커밋한 뒤엔 막히지 않는 경우가 흔함), 데스크톱처럼
+        // 스크롤을 가두는 대신 긴 pin 구간 + scrub + snap으로 실제 스크롤 진행률을 그대로 받아들임
+        ScrollTrigger.create({
+            trigger: '.banner',
+            start: 'top top',
+            end: () => '+=' + (cardCount - 1) * window.innerHeight * 0.8,
+            pin: true,
+            scrub: true,
+            invalidateOnRefresh: true,
+            onRefresh: layoutCylinder,
+            snap: {
+                snapTo: 1 / (cardCount - 1),
+                duration: { min: 0.2, max: 0.5 },
+                ease: 'power1.inOut'
+            },
+            onUpdate: (self) => {
+                activeIndex = Math.round(self.progress * (cardCount - 1));
+                renderCylinder(self.progress * angleStep * (cardCount - 1));
+            }
         });
-    };
+    } else {
+        // 데스크톱: 직접 만든 wheel/touch 트래핑은 ScrollSmoother(smooth:2)의 관성 재생과 계속
+        // 레이스가 나서, pin에 들어와 있는 동안만 스무더를 멈추고 GSAP Observer로
+        // "제스처 1회 = 카드 1스텝"을 맡김
+        const smoother = typeof ScrollSmoother !== 'undefined' ? ScrollSmoother.get() : null;
+        const pauseSmoother = () => smoother && smoother.paused(true);
+        const resumeSmoother = () => smoother && smoother.paused(false);
 
-    const destroyBannerObserver = () => {
-        if (!bannerObserver) return;
-        bannerObserver.kill();
-        bannerObserver = null;
-        resumeSmoother();
-    };
+        // next가 범위를 벗어나면 스텝을 밟지 않고 false를 반환 → 호출부에서 Observer를 해제해 자연 스크롤로 넘김
+        const stepTo = (nextIndex) => {
+            if (nextIndex < 0 || nextIndex > cardCount - 1) return false;
+            goToIndex(nextIndex);
+            return true;
+        };
 
-    ScrollTrigger.create({
-        trigger: '.banner',
-        start: 'top top',
-        end: '+=100', // 실제 스크롤 거리로 쓰이지 않는 안전 버퍼일 뿐, 값 자체는 중요하지 않음
-        pin: true,
-        invalidateOnRefresh: true,
-        onRefresh: layoutCylinder,
-        onEnter: () => { pauseSmoother(); createBannerObserver(); },
-        onEnterBack: () => { pauseSmoother(); createBannerObserver(); },
-        onLeave: destroyBannerObserver,
-        onLeaveBack: destroyBannerObserver
-    });
+        let bannerObserver = null;
+
+        const createBannerObserver = () => {
+            if (bannerObserver) return;
+            bannerObserver = Observer.create({
+                target: window,
+                type: 'wheel,touch,pointer',
+                preventDefault: true,
+                tolerance: 10,
+                onDown: () => { if (!isStepping && !stepTo(activeIndex + 1)) destroyBannerObserver(); },
+                onUp: () => { if (!isStepping && !stepTo(activeIndex - 1)) destroyBannerObserver(); }
+            });
+        };
+
+        const destroyBannerObserver = () => {
+            if (!bannerObserver) return;
+            bannerObserver.kill();
+            bannerObserver = null;
+            resumeSmoother();
+        };
+
+        ScrollTrigger.create({
+            trigger: '.banner',
+            start: 'top top',
+            end: '+=100', // 실제 스크롤 거리로 쓰이지 않는 안전 버퍼일 뿐, 값 자체는 중요하지 않음
+            pin: true,
+            invalidateOnRefresh: true,
+            onRefresh: layoutCylinder,
+            onEnter: () => { pauseSmoother(); createBannerObserver(); },
+            onEnterBack: () => { pauseSmoother(); createBannerObserver(); },
+            onLeave: destroyBannerObserver,
+            onLeaveBack: destroyBannerObserver
+        });
+    }
 }
 
 // footer
