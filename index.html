@@ -21,10 +21,17 @@
 </head>
 
 <body id="main">
+    <nav class="site-nav" id="siteNav" aria-label="주요 섹션 이동">
+        <a href="#top" class="site-nav-link">Home</a>
+        <a href="#about" class="site-nav-link">About</a>
+        <a href="#featured" class="site-nav-link">Projects</a>
+        <a href="#design" class="site-nav-link">Design</a>
+        <a href="#process" class="site-nav-link">Process</a>
+    </nav>
     <div id="smooth-wrapper">
         <div id="smooth-content">
             <main>
-                <section class="poster-container part centerbox">
+                <section class="poster-container part centerbox" id="top">
                     <div class="object-container">
                         <img class="object" src="images/object.png" alt="" aria-hidden="true" id="object">
                     </div>
@@ -56,7 +63,7 @@
                     </div>
                 </section>
 
-                <section class="profile-section part">
+                <section class="profile-section part" id="about">
                     <div class="centerbox">
                         <div class="profile-layout">
                             <h2>Profile</h2>
@@ -228,7 +235,7 @@
                     </div>
                 </section>
 
-                <section class="featured-section part">
+                <section class="featured-section part" id="featured">
                     <div class="featured-curtain">
                         <div class="featured-bigtitle-wrap" aria-hidden="true">
                             <h2 class="featured-bigtitle">Hanssem Redesign<br><span>&amp; Next.js</span></h2>
@@ -681,7 +688,7 @@
                     </section>
                 </div>
 
-                <section class="popup part">
+                <section class="popup part" id="design">
                     <div class="popup-screen">
                         <div class="popup-label">
                             <h2>Popup<br>&<br>Poster</h2>
@@ -754,7 +761,7 @@
                     </div>
                 </div>
 
-                <section class="process-section part">
+                <section class="process-section part" id="process">
                     <div class="centerbox">
                         <h2>How I Work</h2>
                         <div class="process-video">
@@ -802,13 +809,6 @@
             </footer>
         </div>
     </div>
-
-    <button id="scrollTop" class="scroll-top-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#333333">
-            <path d="M444-726 267-549l-51-51 264-264 264 264-51 51-177-177v294h-72v-294Zm0 486v-120h72v120h-72Zm0 144v-72h72v72h-72Z" fill="#333" stroke="#fafafa" stroke-width="20" paint-order="stroke fill" />
-        </svg>
-    </button>
-
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 

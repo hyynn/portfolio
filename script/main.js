@@ -12,15 +12,6 @@ if (!('ontouchstart' in window)) {
     });
 }
 
-if (scrollTopBtn) {
-    ScrollTrigger.create({
-        trigger: ".works-section",
-        start: "top 80%",
-        onEnter: () => scrollTopBtn.classList.add('show'),
-        onLeaveBack: () => scrollTopBtn.classList.remove('show'),
-    });
-}
-
 // title-group
 document.fonts.ready.then(() => {
     let split = SplitText.create(".title-group", { type: "chars" });
@@ -90,6 +81,7 @@ gsap.fromTo("#object",
 
 // 버블 스크롤 페이드아웃
 ScrollTrigger.create({
+    id: "posterPin",
     trigger: ".poster-container",
     start: "top top",
     end: () => "+=" + window.innerHeight,
@@ -196,6 +188,7 @@ gsap.timeline({
 // featured-points-section은 pin 밖 일반 문서 흐름으로 이어지므로(카드 리빌 대상 아님) 이 타임라인에 포함하지 않는다.
 gsap.timeline({
     scrollTrigger: {
+        id: "featuredPin",
         trigger: ".featured-curtain",
         start: "top top",
         end: "+=393%",
@@ -207,6 +200,7 @@ gsap.timeline({
     .to({}, { duration: 0.2 }, 0)
     .fromTo(".featured-bigtitle-wrap", { y: "100vh" }, { y: "0vh", ease: "none", duration: 0.6 }, 0.2)
     .to({}, { duration: 0.3 }, 0.8)
+    .addLabel("bigtitleVisible", 0.95)
     .fromTo(".featured-header", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 1.1)
     .to({}, { duration: 0.3 }, 2.1)
     .fromTo(".compare-main", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 2.4)
@@ -254,6 +248,7 @@ const popupCenterFold = document.getElementById('popup-center-fold');
 const popupFoldsContent = document.querySelectorAll('.popup-fold-content');
 
 ScrollTrigger.create({
+    id: "popupPin",
     trigger: '.popup',
     start: 'top top',
     end: () => '+=' + (popupCenterContent.scrollHeight - popupCenterFold.clientHeight) * 0.8,

@@ -4,7 +4,10 @@ a { text-decoration: none; color: #333; line-height: 1.5; letter-spacing: -0.025
 li { list-style: none; font-family: 'Paperozi', sans-serif; } 
 body { background: #F3F0E9; font-family: 'Paperozi', sans-serif; min-height: 100vh; margin: 0; line-height: 1.5; letter-spacing: -0.025em; color: #333; position: relative; } 
 body, html { overflow-x: hidden; }
-.pin-spacer { pointer-events: none; } 
+.site-nav { position: fixed; bottom: 40px; right: clamp(16px, 3vw, 40px); z-index: 100; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.site-nav-link { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #333; filter: drop-shadow(0 0 1px #fafafa) drop-shadow(0 0 1px #fafafa); transition: opacity 0.2s ease; padding: 6px 8px;}
+.site-nav-link:hover, .site-nav-link.active { opacity: 0.6; }
+.pin-spacer { pointer-events: none; }
 .centerbox { width: 1500px; margin: 0 auto; padding: 150px 0; } 
 h2 { font-size: clamp(24px, 2.60vw, 50px); font-weight: 500; } 
 h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; } 
@@ -538,8 +541,10 @@ h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; }
  .tab-button { padding: 12px 30px; } 
 }
 
-@media (max-width: 767px) { 
- .centerbox, .poster-container { width: 550px; } 
+@media (max-width: 767px) {
+ .site-nav { gap: 0px; bottom: 20px; }
+ .site-nav-link {padding: 4px 6px;}
+ .centerbox, .poster-container { width: 550px; }
  .centerbox { padding: 60px 0; } 
  .poster-container { padding-top: 50px; } 
  .detail-main, .sidebar-content { width: 100%; } 

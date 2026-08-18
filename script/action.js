@@ -225,6 +225,32 @@ window.addEventListener('resize', () => {
     }, 250);
 });
 
+// 앵커 스크롤 목표 위치 계산
+// #top(poster-container), #design(popup)은 GSAP pin 트리거라, 이미 스크롤을 지나친 뒤에는
+// offset().top이 pin 구간이 끝난 지점(버블이 사라진 상태 / 팝업 마지막 이미지)을 가리키게 된다.
+// ScrollTrigger 인스턴스가 미리 계산해둔 pin 시작 위치(progress 0)를 대신 사용한다.
+const ANCHOR_PIN_IDS = { '#top': 'posterPin', '#design': 'popupPin' };
+function getAnchorScrollTop(targetId, targetElement) {
+    // #featured는 pin 시작(progress 0) 대신, featured-bigtitle-wrap이 다 올라와
+    // 멈춰있는 구간(bigtitleVisible 라벨)까지 진행된 지점으로 이동한다.
+    if (targetId === '#featured' && typeof ScrollTrigger !== 'undefined') {
+        const featuredPin = ScrollTrigger.getById('featuredPin');
+        const tl = featuredPin && featuredPin.animation;
+        const labelTime = tl && tl.labels && tl.labels.bigtitleVisible;
+        if (featuredPin && labelTime !== undefined) {
+            const progress = labelTime / tl.duration();
+            return featuredPin.start + progress * (featuredPin.end - featuredPin.start);
+        }
+    }
+
+    const pinId = ANCHOR_PIN_IDS[targetId];
+    if (pinId && typeof ScrollTrigger !== 'undefined') {
+        const pinTrigger = ScrollTrigger.getById(pinId);
+        if (pinTrigger) return pinTrigger.start;
+    }
+    return targetElement.offset().top;
+}
+
 // Document Ready
 $(document).ready(function () {
     // Footer 로드
@@ -249,11 +275,65 @@ $(document).ready(function () {
         if (targetElement.length) {
             setTimeout(function () {
                 window.scrollTo({
-                    top: targetElement.offset().top,
+                    top: getAnchorScrollTop(targetId, targetElement),
                     behavior: 'smooth'
                 });
             }, 500);
         }
+    }
+
+    // 세로 nav 앵커 스크롤
+    document.querySelectorAll('.site-nav a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            const targetElement = $(targetId);
+            if (!targetElement.length) return;
+            e.preventDefault();
+            window.scrollTo({
+                top: getAnchorScrollTop(targetId, targetElement),
+                behavior: 'smooth'
+            });
+            history.pushState(null, '', targetId);
+        });
+    });
+
+    // 세로 nav 현재 위치 표시 (구간 단위로 active 처리: about=profile~works, featured=featured~popup 직전, design=popup~banner)
+    const siteNav = document.querySelector('.site-nav');
+    if (siteNav) {
+        const navZones = [
+            { href: '#top', start: '.poster-container', end: '.profile-section' },
+            { href: '#about', start: '.profile-section', end: '.featured-section' },
+            { href: '#featured', start: '.featured-section', end: '.popup' },
+            { href: '#design', start: '.popup', end: '.process-section' },
+            { href: '#process', start: '.process-section', end: '.thankyou-section' }
+        ].map(function (zone) {
+            return {
+                link: siteNav.querySelector('a[href="' + zone.href + '"]'),
+                startEl: document.querySelector(zone.start),
+                endEl: document.querySelector(zone.end)
+            };
+        }).filter(function (zone) { return zone.link && zone.startEl && zone.endEl; });
+
+        let navSpyTicking = false;
+        function updateNavSpy() {
+            navSpyTicking = false;
+            const centerY = window.innerHeight / 2;
+            let activeLink = null;
+            navZones.forEach(function (zone) {
+                const startTop = zone.startEl.getBoundingClientRect().top;
+                const endTop = zone.endEl.getBoundingClientRect().top;
+                if (centerY >= startTop && centerY < endTop) activeLink = zone.link;
+            });
+            siteNav.querySelectorAll('.site-nav-link').forEach(function (link) {
+                link.classList.toggle('active', link === activeLink);
+            });
+        }
+        window.addEventListener('scroll', function () {
+            if (navSpyTicking) return;
+            navSpyTicking = true;
+            requestAnimationFrame(updateNavSpy);
+        }, { passive: true });
+        updateNavSpy();
     }
 });
 
