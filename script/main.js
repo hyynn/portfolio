@@ -322,23 +322,28 @@ document.fonts.ready.then(() => {
 let initCards = null;
 
 const bannerSlider = document.querySelector('.banner-slider');
+const bannerViewport = document.querySelector('.banner-viewport');
 const bannerCylinder = document.querySelector('.banner-cylinder');
 const bannerCards = gsap.utils.toArray('.banner-card');
 
-if (bannerSlider && bannerCylinder && bannerCards.length > 0) {
+if (bannerSlider && bannerViewport && bannerCylinder && bannerCards.length > 0) {
     const cardCount = bannerCards.length;
     const angleStep = 360 / cardCount; // 카드 사이 회전 각도
     let radius = 0;
     let currentRotation = 0;
 
-    // 배너 이미지 비율(1200:300 = 4:1)에 맞춰 원통 크기를 컨테이너 폭 기준으로 계산
+    // 배너 이미지 비율(1200:300 = 4:1)에 맞춰 원통 크기를 컨테이너 폭 기준으로 계산.
+    // 클리핑(overflow:hidden, .banner-slider)과 원근(perspective, .banner-viewport)을 서로 다른
+    // 요소로 분리해둠 — 같은 요소가 둘 다 맡으면 pin(.banner)+ScrollSmoother(#smooth-content)처럼
+    // transform이 중첩된 조상 안에서 3D 자식에 대한 overflow:hidden 클리핑이 브라우저마다 깨질 수 있음
     const layoutCylinder = () => {
         const width = bannerSlider.offsetWidth;
         const cardH = width / 4;
         radius = (cardH / 2) / Math.tan((angleStep / 2) * Math.PI / 180);
 
-        bannerSlider.style.perspective = (width * 1.2) + 'px';
         bannerSlider.style.height = (cardH + radius) + 'px'; // 카드가 위아래로 회전할 여유 공간을 슬라이더 안에 확보해 타이틀과 겹치지 않게 함
+        bannerViewport.style.perspective = (width * 1.2) + 'px';
+        bannerViewport.style.height = cardH + 'px';
         bannerCylinder.style.height = cardH + 'px';
     };
 
