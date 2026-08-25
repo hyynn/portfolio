@@ -154,8 +154,8 @@ gsap.timeline({
     .from(".profile-section .profile-card", {
         opacity: 0, filter: "blur(8px)", duration: 1.2, ease: "power2.out"
     })
-    .from(".profile-section .profile-body", {
-        opacity: 0, filter: "blur(8px)", duration: 1.2, ease: "power2.out"
+    .from(".profile-section .profile-block", {
+        opacity: 0, filter: "blur(8px)", duration: 1.0, stagger: 0.25, ease: "power2.out"
     }, "-=0.8")
 
 // works
