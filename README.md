@@ -6,6 +6,8 @@ Design to Code - Figma부터 배포까지 직접 구현합니다.
 HTML, CSS, SCSS, Vanilla JS, jQuery, GSAP (ScrollTrigger / ScrollSmoother / SplitText), React, Next.js
 
 ## Featured Project
+- **LUMÉ** - TypeScript + Next.js로 디자인 시스템(토큰 기반 컬러/타이포)부터 상태관리, 데이터 모델링까지 직접 설계한 스킨케어 브랜드 사이트
+  → [Live Site](https://lume-umber-alpha.vercel.app/)
 - **Hanssem Redesign** - 한샘 공식몰을 Next.js(App Router) + TypeScript + Zustand로 재설계한 리디자인 프로젝트
   → [Live Site](https://hanssem-redesign.vercel.app)
 
