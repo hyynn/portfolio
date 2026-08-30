@@ -15,6 +15,8 @@ if (!('ontouchstart' in window)) {
     });
 }
 
+/* ===== 이전 오프닝(poster-container) 애니메이션 — 되돌리려면 주석 해제 후 아래 hero-reveal 블록을 지우세요 =====
+
 // title-group
 document.fonts.ready.then(() => {
     let split = SplitText.create(".title-group", { type: "chars" });
@@ -127,6 +129,45 @@ ScrollTrigger.create({
         }
     }
 });
+===== 이전 오프닝 애니메이션 끝 ===== */
+
+// 오프닝3(hero-reveal) — 타이핑으로 리빌 후, 스크롤에 따라 성(Na)이 먼저 사라지고 이름이 확대·이동하며 profile-section으로 이어짐
+document.fonts.ready.then(() => {
+    let heroChars = SplitText.create(".hero-reveal-name", { type: "chars" });
+    gsap.set(heroChars.chars, { autoAlpha: 0 });
+
+    gsap.timeline()
+        .to(".hero-reveal-role", { autoAlpha: 1, duration: 0.8 })
+        .to(heroChars.chars, {
+            autoAlpha: 1,
+            duration: 0.05,
+            stagger: 0.08,
+            ease: "none"
+        });
+});
+
+gsap.timeline({
+    scrollTrigger: {
+        id: "posterPin",
+        trigger: ".hero-reveal",
+        start: "top top",
+        end: "+=400%",
+        scrub: 1.5,
+        pin: true,
+        anticipatePin: 1
+    }
+})
+    .fromTo(".hero-reveal-role, .hero-reveal-surname",
+        { autoAlpha: 1 },
+        { autoAlpha: 0, duration: 0.3, ease: "power2.out" })
+    .to(".hero-reveal-given", { fontSize: "18vw", duration: 2, ease: "power2.inOut" })
+    .to(".hero-reveal-given", { xPercent: -150, duration: 4, ease: "none" })
+    .fromTo("body",
+        { backgroundColor: "#000" },
+        { backgroundColor: "#F3F0E9", duration: 4, ease: "power2.out" }, "<")
+    .fromTo(".hero-reveal-name",
+        { color: "#F3F0E9" },
+        { color: "#333", duration: 4, ease: "power2.out" }, "<");
 
 // 리사이즈 이벤트 - 가로 크기 변경 시에만 실행
 let prevWidth = window.innerWidth;
@@ -136,7 +177,7 @@ window.addEventListener('resize', function () {
     prevWidth = window.innerWidth;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
-        initDescriptionBox();
+        // initDescriptionBox(); // 이전 오프닝(poster-container) 전용 — hero-reveal로 교체되며 임시 비활성화
         if (initCards) initCards();
         ScrollTrigger.refresh();
     }, 250);

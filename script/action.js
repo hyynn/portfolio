@@ -226,7 +226,7 @@ window.addEventListener('resize', () => {
 });
 
 // 앵커 스크롤 목표 위치 계산
-// #top(poster-container), #design(popup)은 GSAP pin 트리거라, 이미 스크롤을 지나친 뒤에는
+// #top(hero-reveal), #design(popup)은 GSAP pin 트리거라, 이미 스크롤을 지나친 뒤에는
 // offset().top이 pin 구간이 끝난 지점(버블이 사라진 상태 / 팝업 마지막 이미지)을 가리키게 된다.
 // ScrollTrigger 인스턴스가 미리 계산해둔 pin 시작 위치(progress 0)를 대신 사용한다.
 const ANCHOR_PIN_IDS = { '#top': 'posterPin', '#design': 'popupPin' };
@@ -301,7 +301,7 @@ $(document).ready(function () {
     const siteNav = document.querySelector('.site-nav');
     if (siteNav) {
         const navZones = [
-            { href: '#top', start: '.poster-container', end: '.profile-section' },
+            { href: '#top', start: '.hero-reveal', end: '.profile-section' },
             { href: '#about', start: '.profile-section', end: '.featured-section' },
             { href: '#featured', start: '.featured-section', end: '.popup' },
             { href: '#design', start: '.popup', end: '.process-section' },

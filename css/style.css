@@ -11,21 +11,31 @@ body, html { overflow-x: hidden; }
 .centerbox { width: 1500px; margin: 0 auto; padding: 150px 0; } 
 h2 { font-size: clamp(24px, 2.60vw, 50px); font-weight: 500; } 
 h3 { font-size: clamp(20px, 1.46vw, 28px); font-weight: 500; } 
-.object-container { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: -1; } 
-.poster-container { color: #333; display: flex; flex-direction: column; gap: 30px; min-height: 100vh; justify-content: center; position: relative; padding: 0; pointer-events: none; } 
-.split-word { display: inline-block; white-space: nowrap; } 
-.poster-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; } 
-.main-title-section { display: flex; justify-content: space-between; align-items: flex-end; } 
-.title-group { line-height: 0.9; margin-left: -4px; } 
-.title-small { display: block; font-size: clamp(32px, 3.65vw, 70px); font-weight: 700; } 
-.title-large { font-size: clamp(48px, 6.25vw, 120px); font-weight: 700; margin-left: -7px; line-height: 1.2; } 
-.poster-body { font-size: clamp(16px, 1.04vw, 20px); font-weight: 700; text-align: right; } 
-.sub-info-section { display: flex; flex-direction: column; gap: 20px; font-size: 20px; font-weight: 700; line-height: 1.4; } 
-.infinite-beauty { font-size: clamp(18px, 1.25vw, 24px); } 
-.bottom-section { display: flex; justify-content: space-between; gap: 30px; margin-top: 150px; align-items: center; } 
-.date-location { font-size: clamp(20px, 1.88vw, 36px); font-weight: 700; line-height: 1.3; align-self: flex-end; } 
-.location { font-size: 14px; font-weight: 700; margin-top: 20px; } 
-.description-box { border-left: 2px solid #333; padding-left: 20px; width: 40%; font-size: 14px; text-align: justify; } 
+/* ===== 이전 오프닝(poster-container) 스타일 — 되돌리려면 주석 해제 후 아래 hero-reveal 블록을 지우세요 =====
+.object-container { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: -1; }
+.poster-container { color: #333; display: flex; flex-direction: column; gap: 30px; min-height: 100vh; justify-content: center; position: relative; padding: 0; pointer-events: none; }
+.split-word { display: inline-block; white-space: nowrap; }
+.poster-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; }
+.main-title-section { display: flex; justify-content: space-between; align-items: flex-end; }
+.title-group { line-height: 0.9; margin-left: -4px; }
+.title-small { display: block; font-size: clamp(32px, 3.65vw, 70px); font-weight: 700; }
+.title-large { font-size: clamp(48px, 6.25vw, 120px); font-weight: 700; margin-left: -7px; line-height: 1.2; }
+.poster-body { font-size: clamp(16px, 1.04vw, 20px); font-weight: 700; text-align: right; }
+.sub-info-section { display: flex; flex-direction: column; gap: 20px; font-size: 20px; font-weight: 700; line-height: 1.4; }
+.infinite-beauty { font-size: clamp(18px, 1.25vw, 24px); }
+.bottom-section { display: flex; justify-content: space-between; gap: 30px; margin-top: 150px; align-items: center; }
+.date-location { font-size: clamp(20px, 1.88vw, 36px); font-weight: 700; line-height: 1.3; align-self: flex-end; }
+.location { font-size: 14px; font-weight: 700; margin-top: 20px; }
+.description-box { border-left: 2px solid #333; padding-left: 20px; width: 40%; font-size: 14px; text-align: justify; }
+===== 이전 오프닝 스타일 끝 ===== */
+
+/* 오프닝3(hero-reveal) — 검정 배경/밝은 글자로 시작해서 스크롤하면 원래 디자인 시스템 색으로 전환됨 */
+body#main { background: #000; }
+.hero-reveal { min-height: 100vh; display: flex; align-items: center; position: relative; padding: 0; pointer-events: none; color: #F3F0E9; }
+.hero-reveal-role { font-size: clamp(14px, 1.1vw, 20px); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #F3F0E9; margin-bottom: 20px; opacity: 0; }
+.hero-reveal-name { font-size: clamp(56px, 10vw, 180px); font-weight: 600; line-height: 1.2; margin-left: -4px; }
+.hero-reveal-surname, .hero-reveal-given { display: inline-block; }
+.hero-reveal-surname { margin-right: 0.2em; }
 
 /* 소개 */
 .profile-section { margin-top: 100px; } 
