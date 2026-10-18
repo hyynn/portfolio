@@ -169,6 +169,34 @@ document.querySelectorAll('.scroll-figure').forEach(figure => {
 // offset().top이 pin 구간이 끝난 지점(버블이 사라진 상태 / 팝업 마지막 이미지)을 가리키게 된다.
 // ScrollTrigger 인스턴스가 미리 계산해둔 pin 시작 위치(progress 0)를 대신 사용한다.
 const ANCHOR_PIN_IDS = { '#top': 'posterPin', '#design': 'popupPin' };
+// 내비/해시 자동 스크롤 — 이동하는 동안 window.isNavScrolling을 켜서 배너(main.js)가 스크롤을 가두지 않게 함.
+// ScrollSmoother가 있으면 콘텐츠가 네이티브 스크롤보다 늦게 따라오므로(ScrollTrigger 콜백도 이 값 기준),
+// 화면에 보이는 위치까지 멈춘 뒤에 해제해야 도착 직전에 배너가 다시 잡지 않음
+let navScrollRaf = null;
+function navScrollTo(top) {
+    if (typeof window.releaseBannerCapture === 'function') window.releaseBannerCapture();
+    window.isNavScrolling = true;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+
+    const content = document.getElementById('smooth-content');
+    const visualY = () => (content && typeof gsap !== 'undefined') ? -gsap.getProperty(content, 'y') : window.scrollY;
+    const startedAt = performance.now();
+    let lastY = null;
+    let stillFrames = 0;
+    cancelAnimationFrame(navScrollRaf);
+    (function check() {
+        const y = visualY();
+        stillFrames = (lastY !== null && Math.abs(y - lastY) < 0.5 && Math.abs(y - window.scrollY) < 2) ? stillFrames + 1 : 0;
+        lastY = y;
+        // 약 0.2초 동안 움직임이 없거나, 안전장치로 6초가 지나면 종료
+        if (stillFrames >= 12 || performance.now() - startedAt > 6000) {
+            window.isNavScrolling = false;
+            return;
+        }
+        navScrollRaf = requestAnimationFrame(check);
+    })();
+}
+
 function getAnchorScrollTop(targetId, targetElement) {
     const pinId = ANCHOR_PIN_IDS[targetId];
     if (pinId && typeof ScrollTrigger !== 'undefined') {
@@ -201,10 +229,7 @@ $(document).ready(function () {
         const targetElement = $(targetId);
         if (targetElement.length) {
             setTimeout(function () {
-                window.scrollTo({
-                    top: getAnchorScrollTop(targetId, targetElement),
-                    behavior: 'smooth'
-                });
+                navScrollTo(getAnchorScrollTop(targetId, targetElement));
             }, 500);
         }
     }
@@ -216,10 +241,7 @@ $(document).ready(function () {
             const targetElement = $(targetId);
             if (!targetElement.length) return;
             e.preventDefault();
-            window.scrollTo({
-                top: getAnchorScrollTop(targetId, targetElement),
-                behavior: 'smooth'
-            });
+            navScrollTo(getAnchorScrollTop(targetId, targetElement));
             history.pushState(null, '', targetId);
         });
     });
@@ -260,6 +282,18 @@ $(document).ready(function () {
             navSpyTicking = true;
             requestAnimationFrame(updateNavSpy);
         }, { passive: true });
+        // ScrollSmoother 사용 시 화면(#smooth-content)은 네이티브 scroll 이벤트가 끝난 뒤에도 잠시 더 움직이므로,
+        // 보이는 위치가 바뀌는 동안 매 프레임 다시 판정해야 도착 지점의 메뉴가 active로 남음
+        const smoothContent = document.getElementById('smooth-content');
+        if (smoothContent && typeof gsap !== 'undefined') {
+            let lastContentY = null;
+            gsap.ticker.add(function () {
+                const y = gsap.getProperty(smoothContent, 'y');
+                if (y === lastContentY) return;
+                lastContentY = y;
+                updateNavSpy();
+            });
+        }
         updateNavSpy();
     }
 });

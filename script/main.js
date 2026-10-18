@@ -297,21 +297,25 @@ function initThankyouAnim() {
     ).join('');
 
     const letters = document.querySelectorAll('.ty-letter');
-    const overflowX = el.clientWidth - window.innerWidth;
 
-    gsap.set(el, { x: window.innerWidth });
+    // 문장 시작 위치 = 화면 폭 × TY_START_X. 1보다 크게 둬서, 랜덤 회전된 첫 글자가 pin 시작 전 화면 오른쪽 끝에 삐져나오지 않게 함
+    const TY_START_X = 1.1;
 
-    const scrollAnim = gsap.to(el, {
-        x: () => -(el.clientWidth) + 'px',
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '.thankyou-section',
-            pin: true,
-            scrub: true,
-            end: () => '+=' + (el.clientWidth + window.innerWidth) * 0.6,
-            invalidateOnRefresh: true
-        }
-    });
+    // 시작 x를 함수로 둬야 리사이즈(refresh) 때마다 현재 화면 폭으로 다시 계산됨 —
+    // gsap.set으로 한 번만 정하면 처음 연 폭이 남아서, 창을 넓히면 pin 전에 문장이 이미 화면 안에 들어와 있게 됨
+    const scrollAnim = gsap.fromTo(el,
+        { x: () => window.innerWidth * TY_START_X },
+        {
+            x: () => -(el.clientWidth) + 'px',
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.thankyou-section',
+                pin: true,
+                scrub: true,
+                end: () => '+=' + (el.clientWidth + window.innerWidth * TY_START_X) * 0.6,
+                invalidateOnRefresh: true
+            }
+        });
 
     letters.forEach(letter => {
         const props = {
@@ -467,6 +471,16 @@ if (bannerSlider && bannerViewport && bannerCylinder && bannerCards.length > 0) 
             resumeSmoother();
         };
 
+        // 사이트 내비(action.js navScrollTo)가 자동 스크롤로 배너를 지나가는 동안에는 가두지 않음 —
+        // 가두면 이동이 배너에서 멈추고 스무더가 paused로 남아 이후 내비 클릭이 모두 무시됨
+        const captureBanner = () => {
+            if (window.isNavScrolling) return;
+            pauseSmoother();
+            createBannerObserver();
+        };
+        // 배너에 갇힌 상태에서 내비를 누르면 먼저 풀어줌
+        window.releaseBannerCapture = destroyBannerObserver;
+
         ScrollTrigger.create({
             trigger: '.banner',
             start: 'top top',
@@ -474,8 +488,8 @@ if (bannerSlider && bannerViewport && bannerCylinder && bannerCards.length > 0) 
             pin: true,
             invalidateOnRefresh: true,
             onRefresh: layoutCylinder,
-            onEnter: () => { pauseSmoother(); createBannerObserver(); },
-            onEnterBack: () => { pauseSmoother(); createBannerObserver(); },
+            onEnter: captureBanner,
+            onEnterBack: captureBanner,
             onLeave: destroyBannerObserver,
             onLeaveBack: destroyBannerObserver
         });
