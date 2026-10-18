@@ -228,7 +228,8 @@ body#main { background: #000; }
 
 /* sub page */
 .centerbox.sub-topmenu { padding: 50px 0 0 0; } 
-.detail-container { width: 1600px; margin: 0 auto; padding: 0 0 50px 0; } 
+/* 가로 폭·여백은 .centerbox를 그대로 따름 (header의 .centerbox.sub-topmenu와 좌우 끝선 일치) */
+.detail-container { padding: 0 0 50px 0; } 
 .content-wrapper { display: flex; justify-content: space-between; } 
 .detail-main { width: 60%; } 
 .sidebar-content { width: 35%; padding: 50px 0; display: none; transition: opacity 0.3s ease; } 
@@ -264,7 +265,9 @@ body#main { background: #000; }
 .info-value { color: #505050; } 
 
 /* Process Tab Styles */
+/* 본문(.workflow-container / .detail-section / .page-preview-container)과 .sidebar-content의 위쪽 여백은 모든 구간에서 같은 값 — 탭 제목은 본문 안 .compare-heading h2로 두고 sidebar는 그 윗선에 맞춰 시작 */
 .workflow-container { padding: 50px 0; } 
+.workflow-container .compare-heading h2 { margin-bottom: clamp(20px, 1.56vw, 30px); }
 .workflow-title { font-size: clamp(20px, 1.88vw, 36px); font-weight: 600; margin-bottom: 30px; color: #333; } 
 .workflow-timeline { position: relative; padding-left: 80px; } 
 .workflow-timeline::before { content: ''; position: absolute; left: 30px; top: 30px; bottom: 30px; width: 2px; background: linear-gradient(to bottom, #A5B2A2, #B9C9B5); } 
@@ -340,7 +343,7 @@ body#main { background: #000; }
 .mobile-preview-item:hover img { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); } 
 
 /* Process 사이드바 패딩 조정 */
-#process-sidebar { padding-top: 130px; } 
+
 
 /* Footer Styles */
 /* Main Footer */
@@ -362,18 +365,17 @@ body#main { background: #000; }
 .scroll-top-btn:hover { background: rgba(254, 254, 254, 0.37); } 
 
 @media (max-width: 1720px) { 
- .centerbox, .poster-container, .detail-container { width: 1400px; } 
+ .centerbox, .poster-container { width: 1400px; } 
 }
 
 @media (max-width: 1599px) { 
- .centerbox, .poster-container, .detail-container { width: 1300px; } 
+ .centerbox, .poster-container { width: 1300px; } 
  .project-header { margin-bottom: 30px; } 
  .project-title { margin-bottom: 0; } 
  .detail-main { width: 55%; } 
- .page-preview-container, .sidebar-content { padding: 30px 0; } 
+ .page-preview-container, .sidebar-content, .workflow-container, .detail-section { padding: 30px 0; } 
  .section-card { margin-bottom: 30px; } 
  .sidebar-content { width: 40%; } 
- #process-sidebar { padding-top: 120px; } 
  .mobile-preview-container { padding: 20px 0; } 
 }
 
@@ -383,10 +385,8 @@ body#main { background: #000; }
  .profile-section .profile-block .skills img { width: 45px; } 
  .profile-section .photo, .profile-section .profile-meta { width: 280px; } 
  .popup-fold {width: 40vw;}
- .page-preview-container, .sidebar-content { padding: 20px 0; } 
+ .page-preview-container, .sidebar-content, .workflow-container, .detail-section { padding: 20px 0; } 
  .section-card { margin-bottom: 20px; } 
- .detail-container { padding-right: 50px; } 
-#process-sidebar { padding-top: 118px; } 
 }
 
  @media (max-width: 1220px) { 
@@ -400,15 +400,12 @@ body#main { background: #000; }
  .works-section .works-card { padding-top: 20px; gap: 10px; } 
  .works-section .works-label { margin-bottom: 20px; } 
   .popup-fold {width: 50vw;}
- .page-preview-container, .sidebar-content { padding: 10px 0; } 
+ .page-preview-container, .sidebar-content, .workflow-container, .detail-section { padding: 10px 0; } 
  .section-card { margin-bottom: 10px; } 
- .workflow-container { padding: 20px; } 
  .workflow-title { margin-bottom: 40px; } 
  .workflow-step, .section-card { margin-bottom: 30px; } 
  .step-content h3, .detail-sidebar-process h5, .detail-sidebar-mobile h5 { margin-bottom: 10px; } 
  .step-content ul li { padding: 4px 0 4px 14px; } 
- .detail-container { padding-right:20px; } 
-#process-sidebar { padding-top: 112px; } 
 .typography-detail { gap: 10px; } 
 .card-body { gap: 10px; } 
 .card-description { line-height: 1.4; } 
@@ -420,12 +417,11 @@ body#main { background: #000; }
  .centerbox, .poster-container { width: 900px; } 
  .profile-section .profile-block .skills img { width: 40px; } 
 .profile-section .profile-layout { gap: 20px 60px; } 
- .page-preview-container, .sidebar-content { padding: 0; } 
+ .page-preview-container, .sidebar-content, .workflow-container, .detail-section { padding: 0; } 
  .sidebar-content { width: 40%; } 
  .detail-main #process-tab { width: 100%; } 
  .mobile-preview-container { gap: 20px; padding: 0; } 
  .mobile-preview-item img { border-radius: 6px; } 
- #process-sidebar { padding-top: 98px; } 
  .workflow-title { margin-bottom: 30px; } 
  .section-card { margin-bottom: 20px; } 
 }
@@ -447,14 +443,13 @@ body#main { background: #000; }
  .works-section .works-grid { grid-template-columns: 1fr; } 
  .banner h2 { top: 90px; } 
  .centerbox.sub-topmenu { padding: 40px 0 0 0; } 
- .detail-container { padding: 0 0 40px 0; padding-right: 0; } 
+ .detail-container { padding: 0 0 40px 0; } 
  .workflow-container { padding: 0; } 
  .workflow-timeline::before, .step-number { display: none; } 
  .workflow-timeline { padding: 0; } 
  .color-preview { width: 10px; } 
  .detail-main { width: 50%; } 
  .sidebar-content { width: 46%; } 
- #process-sidebar { padding-top: 48px; } 
  .workflow-title { margin-bottom: 20px; } 
  .tab-button { padding: 12px 30px; } 
 }
@@ -466,6 +461,7 @@ body#main { background: #000; }
  .centerbox { padding: 60px 0; } 
  .poster-container { padding-top: 50px; } 
  .detail-main, .sidebar-content { width: 100%; } 
+ .sidebar-content { padding-top: 40px; } 
  .description-box { width: 60%; } 
  .profile-section .profile-layout { gap: 20px 20px; } 
  .profile-section .profile-grid { grid-template-columns: 1fr 1fr; } 
