@@ -145,6 +145,7 @@ body#main { background: #000; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .sub06 .section-card { cursor: default; }
 .project-retro { padding: 50px 0 0; }
+.code-tree { font-family: Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; color: #505050; background: #F3F0E9; border-radius: 8px; padding: 16px; overflow-x: auto; white-space: pre; }
 .todo-slot { border: 1px dashed #C9A77C; border-radius: 8px; padding: 16px 20px; font-size: 15px; color: #8a7556; background: rgba(201, 167, 124, 0.08); line-height: 1.6; }
 .todo-slot::before { content: '✎ 작성 예정 · '; font-weight: 600; }
 .todo-inline { color: #C9A77C; }
@@ -156,6 +157,7 @@ body#main { background: #000; }
 @media (max-width: 767px) {
  .featured-cards { grid-template-columns: 1fr; gap: 60px; }
  .point-card { padding: 20px; border-radius: 8px; }
+ .point-list li { text-align: left; }
 }
 
 /* 섹션 공통 */
