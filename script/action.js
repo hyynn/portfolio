@@ -162,67 +162,20 @@ function initMobileNavigation() {
     });
 }
 
-// Featured Compare 이미지 hover 스크롤
-document.querySelectorAll('.featured-compare figure').forEach(figure => {
+// 긴 스크린샷 figure hover 스크롤 (index Featured 카드 썸네일, sub06 Before/After 비교)
+// 숨겨진 탭 안에서는 높이가 0으로 측정되므로, 로드 시점이 아니라 mouseenter 시점에 거리를 계산한다.
+document.querySelectorAll('.scroll-figure').forEach(figure => {
     const img = figure.querySelector('img');
     if (!img) return;
 
-    const setup = () => {
+    figure.addEventListener('mouseenter', () => {
         const distance = img.offsetHeight - figure.offsetHeight;
         if (distance <= 0) return;
         const duration = Math.max(3, (distance / 1000) * 3.5);
         img.style.transition = `top ${duration}s linear`;
-        figure.addEventListener('mouseenter', () => { img.style.top = `-${distance}px`; });
-        figure.addEventListener('mouseleave', () => { img.style.top = '0'; });
-    };
-
-    if (img.complete && img.naturalHeight > 0) setup();
-    else img.addEventListener('load', setup);
-});
-
-// Featured Project 아코디언
-const featuredToggles = document.querySelectorAll('.featured-point .point-toggle');
-const featuredPointsList = document.querySelector('.featured-points');
-const featuredFirstPointBody = document.getElementById('point-body-1');
-const FEATURED_SAFE_HEIGHT_RATIO = 0.85;
-let featuredFirstPointUserTouched = false;
-
-// point 1이 열렸을 때 아코디언 리스트 높이가 뷰포트를 과하게 초과하면 자동으로 닫는다 (사용자가 직접 토글하기 전까지만 적용)
-// aria-expanded를 임시로 바꿔서 재는 방식은 grid-template-rows transition 때문에 직후 read가 이전 값을 반환해 신뢰할 수 없으므로,
-// transition에 영향받지 않는 scrollHeight로 "열렸을 때 높이"를 계산한다.
-function evaluateFeaturedFirstPoint() {
-    const firstToggle = featuredToggles[0];
-    if (featuredFirstPointUserTouched || !firstToggle || !featuredPointsList || !featuredFirstPointBody) return;
-
-    const wasOpen = firstToggle.getAttribute('aria-expanded') === 'true';
-    const openHeight = wasOpen
-        ? featuredPointsList.offsetHeight
-        : featuredPointsList.offsetHeight + featuredFirstPointBody.scrollHeight;
-    const fits = openHeight <= window.innerHeight * FEATURED_SAFE_HEIGHT_RATIO;
-    firstToggle.setAttribute('aria-expanded', String(fits));
-}
-
-evaluateFeaturedFirstPoint();
-document.fonts.ready.then(evaluateFeaturedFirstPoint);
-
-featuredToggles.forEach(toggle => {
-    toggle.addEventListener('click', function () {
-        featuredFirstPointUserTouched = true;
-        const isOpen = this.getAttribute('aria-expanded') === 'true';
-        featuredToggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
-        this.setAttribute('aria-expanded', String(!isOpen));
+        img.style.top = `-${distance}px`;
     });
-});
-
-let featuredResizeWidth = window.innerWidth;
-let featuredResizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(featuredResizeTimer);
-    featuredResizeTimer = setTimeout(() => {
-        if (window.innerWidth === featuredResizeWidth) return;
-        featuredResizeWidth = window.innerWidth;
-        evaluateFeaturedFirstPoint();
-    }, 250);
+    figure.addEventListener('mouseleave', () => { img.style.top = '0'; });
 });
 
 // 앵커 스크롤 목표 위치 계산
@@ -231,18 +184,6 @@ window.addEventListener('resize', () => {
 // ScrollTrigger 인스턴스가 미리 계산해둔 pin 시작 위치(progress 0)를 대신 사용한다.
 const ANCHOR_PIN_IDS = { '#top': 'posterPin', '#design': 'popupPin' };
 function getAnchorScrollTop(targetId, targetElement) {
-    // #featured는 pin 시작(progress 0) 대신, featured-bigtitle-wrap이 다 올라와
-    // 멈춰있는 구간(bigtitleVisible 라벨)까지 진행된 지점으로 이동한다.
-    if (targetId === '#featured' && typeof ScrollTrigger !== 'undefined') {
-        const featuredPin = ScrollTrigger.getById('featuredPin');
-        const tl = featuredPin && featuredPin.animation;
-        const labelTime = tl && tl.labels && tl.labels.bigtitleVisible;
-        if (featuredPin && labelTime !== undefined) {
-            const progress = labelTime / tl.duration();
-            return featuredPin.start + progress * (featuredPin.end - featuredPin.start);
-        }
-    }
-
     const pinId = ANCHOR_PIN_IDS[targetId];
     if (pinId && typeof ScrollTrigger !== 'undefined') {
         const pinTrigger = ScrollTrigger.getById(pinId);

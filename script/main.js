@@ -228,29 +228,21 @@ gsap.timeline({
         opacity: 0, scale: 0.6, filter: "blur(8px)", duration: 1.0, ease: "power2.out"
     })
 
-// featured project intro - featured-curtain을 고정한 채 레이어들이 차례로 위로 올라와 덮는 커튼 리빌
-// featured-points-section은 pin 밖 일반 문서 흐름으로 이어지므로(카드 리빌 대상 아님) 이 타임라인에 포함하지 않는다.
+// featured project - 타이틀 → 카드 2장 blur 페이드인 (profile/works와 동일한 방식)
 gsap.timeline({
     scrollTrigger: {
-        id: "featuredPin",
-        trigger: ".featured-curtain",
-        start: "top top",
-        end: "+=393%",
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true
+        trigger: ".featured-section",
+        start: "top 60%",
+        end: "top 10%",
+        scrub: true,
     }
 })
-    .to({}, { duration: 0.2 }, 0)
-    .fromTo(".featured-bigtitle-wrap", { y: "100vh" }, { y: "0vh", ease: "none", duration: 0.6 }, 0.2)
-    .to({}, { duration: 0.3 }, 0.8)
-    .addLabel("bigtitleVisible", 0.95)
-    .fromTo(".featured-header", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 1.1)
-    .to({}, { duration: 0.3 }, 2.1)
-    .fromTo(".compare-main", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 2.4)
-    .to({}, { duration: 0.3 }, 3.4)
-    .fromTo(".compare-category", { y: "100vh" }, { y: "0vh", ease: "none", duration: 1 }, 3.7)
-    .to({}, { duration: 0.3 }, 4.7);
+    .from(".featured-title", {
+        opacity: 0, filter: "blur(8px)", duration: 1.0, ease: "power2.out"
+    })
+    .from(".featured-card", {
+        opacity: 0, filter: "blur(8px)", duration: 1.0, stagger: 0.25, ease: "power2.out"
+    }, "-=0.6")
 
 // selected works intro 핀 + 헤딩 등장
 ScrollTrigger.create({
@@ -272,18 +264,6 @@ gsap.from(".portfolio-intro h2", {
     y: 60,
     ease: "none"
 });
-
-// section5
-gsap.timeline({
-    scrollTrigger: {
-        trigger: ".section5",
-        start: "top 70%",
-        end: "bottom bottom",
-        scrub: true,
-    }
-}).from(".vis1", { x: 400 }, 'moScreen')
-    .from(".vis2", { x: 200 }, 'moScreen')
-    .from(".vis3", { x: 0 }, 'moScreen');
 
 
 // popup
