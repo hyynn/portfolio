@@ -244,26 +244,21 @@ gsap.timeline({
         opacity: 0, filter: "blur(8px)", duration: 1.0, stagger: 0.25, ease: "power2.out"
     }, "-=0.6")
 
-// selected works intro 핀 + 헤딩 등장
-ScrollTrigger.create({
-    trigger: ".portfolio-intro",
-    pin: true,
-    start: "top top",
-    end: "+=80%",
-    invalidateOnRefresh: true
-});
-
-gsap.from(".portfolio-intro h2", {
+// case study - 타이틀 → 리스트·프리뷰 blur 페이드인 (featured와 동일한 방식)
+gsap.timeline({
     scrollTrigger: {
-        trigger: ".portfolio-intro",
-        start: "top 70%",
+        trigger: ".case-study",
+        start: "top 60%",
         end: "top 10%",
-        scrub: true
-    },
-    opacity: 0,
-    y: 60,
-    ease: "none"
-});
+        scrub: true,
+    }
+})
+    .from(".case-title", {
+        opacity: 0, filter: "blur(8px)", duration: 1.0, ease: "power2.out"
+    })
+    .from(".case-item, .case-preview", {
+        opacity: 0, filter: "blur(8px)", duration: 1.0, stagger: 0.15, ease: "power2.out"
+    }, "-=0.6")
 
 
 // popup

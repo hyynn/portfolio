@@ -94,9 +94,9 @@ body#main { background: #000; }
 .process-volume { width: 70px; height: 4px; accent-color: #fff; cursor: pointer; }
 
 /* Featured Project (index) */
-.featured-section { background: #F3F0E9; position: relative; z-index: 1; background-image: linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px); background-size: 600px 600px; }
-.featured-title { font-size: clamp(40px, 6.5vw, 130px); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: clamp(40px, 4.2vw, 80px); }
-.featured-title span { color: #C9A77C; }
+.featured-section { background: #F3F0E9; position: relative; z-index: 1; }
+.featured-title, .case-title { font-size: clamp(40px, 6.5vw, 130px); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: clamp(40px, 4.2vw, 80px); }
+.featured-title span, .case-title span { color: #C9A77C; }
 .featured-cards { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 2.6vw, 50px); }
 .featured-card { display: flex; flex-direction: column; gap: 28px; }
 .featured-card-thumb { display: block; }
@@ -120,8 +120,39 @@ body#main { background: #000; }
 .scroll-figure.img-missing img { display: none; }
 .scroll-figure.img-missing::after { content: '이미지 준비 중'; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: #6b6555; font-size: 14px; }
 
-.portfolio-intro { height: 100vh; display: flex; align-items: center; background: #F3F0E9; position: relative; z-index: 1; }
-.portfolio-intro h2 { font-size: clamp(60px, 9vw, 180px); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; }
+/* Case Study (index) - 리스트 + 프리뷰. 행 hover/focus 시 프리뷰 스크린샷·설명 교체 (action.js) */
+.case-study { background: #F3F0E9; position: relative; z-index: 1; }
+.case-layout { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(40px, 4.2vw, 80px); align-items: start; }
+.case-list { border-top: 1px solid #999; }
+/* 흐림 효과는 .case-link에 — .case-item의 opacity는 GSAP 등장 애니메이션이 쓰므로 CSS transition을 겹치면 안 됨 */
+.case-item { border-bottom: 1px solid #999; }
+.case-list:hover .case-item:not(.is-active) .case-link, .case-list:focus-within .case-item:not(.is-active) .case-link { opacity: 0.45; }
+.case-link { transition: opacity 0.3s ease; display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: start; padding: 28px 0; }
+.case-num { font-size: clamp(14px, 1.04vw, 20px); font-weight: 700; color: #C9A77C; padding-top: 6px; }
+.case-name { font-size: clamp(22px, 1.88vw, 36px); font-weight: 600; line-height: 1.2; }
+.case-sub { font-size: clamp(15px, 0.94vw, 18px); color: #505050; margin-top: 6px; }
+.case-concept { display: none; font-size: clamp(15px, 0.94vw, 18px); color: #505050; line-height: 1.7; margin-top: 12px; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.case-tags .tech-tag { padding: 3px 9px; font-size: clamp(12px, 0.73vw, 14px); }
+.case-arrow { font-weight: 600; font-size: clamp(14px, 0.83vw, 16px); white-space: nowrap; padding-top: 8px; opacity: 0; transition: opacity 0.3s ease; }
+.case-item.is-active .case-arrow { opacity: 1; }
+.case-preview { display: flex; flex-direction: column; gap: 20px; }
+.case-preview-frame { position: relative; aspect-ratio: 16 / 10; border-radius: 12px; overflow: hidden; background: #211f17; border: 1px solid #353225; }
+.case-preview-frame img { position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.4s ease; }
+.case-preview-frame img.is-active { opacity: 1; }
+.case-preview-desc { font-size: clamp(15px, 0.94vw, 18px); color: #505050; line-height: 1.7; text-align: justify; }
+
+@media (max-width: 924px) {
+ .case-layout { grid-template-columns: 1fr; }
+ .case-preview { display: none; }
+ .case-concept { display: block; }
+ .case-arrow { opacity: 1; }
+ .case-list:hover .case-item:not(.is-active) .case-link, .case-list:focus-within .case-item:not(.is-active) .case-link { opacity: 1; }
+}
+@media (max-width: 600px) {
+ .case-link { grid-template-columns: auto 1fr; gap: 16px; }
+ .case-arrow { grid-column: 2; padding-top: 0; }
+}
 
 /* sub06 (Featured 상세) - Design / Publishing / Frontend 탭 */
 .project-problem { margin-top: 30px; }
@@ -160,72 +191,6 @@ body#main { background: #000; }
  .point-list li { text-align: left; }
 }
 
-/* 섹션 공통 */
-.sectionbox .centerbox { display: flex; justify-content: space-between; align-items: center; } 
-.sectionbox .textbox { width: 35.33%; } 
-.sectionbox .textbox .textbox-body { padding: 0 10px; } 
-.sectionbox .textbox h2 { font-size: clamp(24px, 2.60vw, 50px); font-weight: normal; line-height: 1; margin-bottom: 10px; } 
-.sectionbox .textbox h2 span { font-size: clamp(36px, 4.17vw, 80px); margin-right: 5px; } 
-.sectionbox .textbox .concept h3 { font-weight: 500; font-size: clamp(18px, 1.56vw, 30px); color: #505050; } 
-.sectionbox .textbox .concept p { font-size: clamp(16px, 0.94vw, 18px); text-align: justify; margin-top: 5px; } 
-.sectionbox .textbox .detail { display: flex; flex-direction: column; gap: 10px; margin-top: 36px; } 
-.sectionbox .textbox .detail .item { display: flex; gap: 40px; font-size: clamp(16px, 1.15vw, 22px); } 
-.sectionbox .textbox .detail .item .label { font-weight: 500; display: inline-block; width: 130px; color: #505050; } 
-.sectionbox .textbox .detail .item .value { font-weight: 400; flex: 1; } 
-.sectionbox .textbox .detail .item .color-chip { display: inline-block; width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ddd; vertical-align: middle; margin-right: 10px; } 
-
-.sectionbox .btn-detail { border: 1px solid rgba(255, 255, 255, 0.3); padding: 8px 12px; margin-left: auto; margin-top: 20px; width: fit-content; border-radius: 6px; background: #fff; box-shadow: 0 1px 2px 0 rgba(135, 123, 31, 0.37); font-weight: 600; text-align: center; transition: transform 0.2s ease; position: relative; z-index: 1; touch-action: manipulation; pointer-events: auto; }
-.sectionbox .btn-detail:hover { background: #f5f5f5 } 
-
-.sectionbox .visualbox { width: 58.33%; position: relative; } 
-.sectionbox .visualbox figure { width: 100%; } 
-.sectionbox .visualbox figure img { width: 100%; object-fit: cover } 
-.sectionbox .visualbox .screen { width: 97%; height: 498px; top: 13px; left: 50%; transform: translateX(-50%); position: absolute; z-index: 2; background: #000; border-radius: 11px; overflow: hidden; } 
-.sectionbox .visualbox .screen img { width: 100%; position: absolute; top: 0; left: 0; object-fit: cover; } 
-
-.sectionbox .mobilebox .visualbox2 .screen img { width: 100%; position: absolute; top: 0; left: 0; object-fit: cover; } 
-
-
-
-/* textbox active */
-.sectionbox .textbox h2,
-.sectionbox .textbox .concept,
-.sectionbox .textbox .detail { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; } 
-.sectionbox .textbox.active h2 { opacity: 1; transform: translateY(0); transition-delay: 0.1s; } 
-.sectionbox .textbox.active .concept { opacity: 1; transform: translateY(0); transition-delay: 0.3s; } 
-.sectionbox .textbox.active .detail { opacity: 1; transform: translateY(0); transition-delay: 0.5s; } 
-
-
-/* section1 COLOR CHIPS */
-.section1 .textbox .detail .item .color-chip:nth-child(1) { background-color: #A5B2A2; } 
-.section1 .textbox .detail .item .color-chip:nth-child(2) { background-color: #B9C9B5; } 
-.section1 .textbox .detail .item .color-chip:nth-child(3) { background-color: #333333; } 
-.section1 .textbox .detail .item .color-chip:nth-child(4) { background-color: #505050; } 
-.section1 .textbox .detail .item .color-chip:nth-child(5) { background-color: #FAF9F6; } 
-
-/* section2 COLOR CHIPS */
-.section2 .textbox .detail .item .color-chip:nth-child(1) { background-color: #032753; } 
-.section2 .textbox .detail .item .color-chip:nth-child(2) { background-color: #ACBFFF; } 
-.section2 .textbox .detail .item .color-chip:nth-child(3) { background-color: #222222; } 
-.section2 .textbox .detail .item .color-chip:nth-child(4) { background-color: #404040; } 
-.section2 .textbox .detail .item .color-chip:nth-child(5) { background-color: #FAFAFA; } 
-
-/* section3 COLOR CHIPS */
-.section3 .textbox .detail .item .color-chip:nth-child(1) { background-color: #22356F; } 
-.section3 .textbox .detail .item .color-chip:nth-child(3) { background-color: #4A90E2; } 
-.section3 .textbox .detail .item .color-chip:nth-child(4) { background-color: #333333; } 
-.section3 .textbox .detail .item .color-chip:nth-child(5) { background-color: #555555; } 
-.section3 .textbox .detail .item .color-chip:nth-child(2) { background-color: #FBFAF9; } 
-
-
-/* section4 COLOR CHIPS */
-.section4 .textbox .detail .item .color-chip:nth-child(1) { background-color: #4A6FA5; } 
-.section4 .textbox .detail .item .color-chip:nth-child(2) { background-color: #1A1A1A; } 
-.section4 .textbox .detail .item .color-chip:nth-child(3) { background-color: #3A3A3A; } 
-.section4 .textbox .detail .item .color-chip:nth-child(4) { background-color: #5A5A5A; } 
-.section4 .textbox .detail .item .color-chip:nth-child(5) { background-color: #FBFAF9; } 
-
-/* COLOR CHIPS END */
 
 
 /* popup */
@@ -398,20 +363,10 @@ body#main { background: #000; }
 
 @media (max-width: 1720px) { 
  .centerbox, .poster-container, .detail-container { width: 1400px; } 
- .sectionbox .textbox { width: 36.33%; } 
- .sectionbox .textbox .detail { margin-top: 30px; gap: 10px; } 
- .sectionbox .textbox .detail .item .label { width: 120px; } 
- .sectionbox .visualbox .screen { height: 449px; top: 12px; border-radius: 10px; } 
- .sectionbox .mobilebox { width: 73.33%; } 
 }
 
 @media (max-width: 1599px) { 
  .centerbox, .poster-container, .detail-container { width: 1300px; } 
- .sectionbox .visualbox .screen { height: 438.5px; } 
- .sectionbox .visualbox { width: 59.33%; } 
- .sectionbox .textbox { width: 36.33%; } 
- .sectionbox .textbox .detail { margin-top: 30px; gap: 10px; } 
- .sectionbox .textbox .detail .btn-detail { margin-top: 20px; } 
  .project-header { margin-bottom: 30px; } 
  .project-title { margin-bottom: 0; } 
  .detail-main { width: 55%; } 
@@ -427,16 +382,6 @@ body#main { background: #000; }
  .profile-section h2 { margin-bottom: 20px; } 
  .profile-section .profile-block .skills img { width: 45px; } 
  .profile-section .photo, .profile-section .profile-meta { width: 280px; } 
- .sectionbox .visualbox { width: 56%; } 
- .sectionbox .visualbox .screen { height: 369px; top: 10px; border-radius: 8px; } 
- .sectionbox .textbox { width:44% } 
- .sectionbox .textbox h2 { margin-bottom: 6px; } 
- .sectionbox .textbox .concept p { margin-top: 2px; } 
- .sectionbox .textbox .detail { margin-top: 20px; gap: 6px; } 
- .sectionbox .textbox .detail .item .label { width: 110px; } 
- .sectionbox .textbox { width: 40.33%; } 
- .sectionbox .textbox .detail { margin-top: 26px; gap: 6px; } 
- .sectionbox .textbox .detail .btn-detail { margin-top: 18px; } 
  .popup-fold {width: 40vw;}
  .page-preview-container, .sidebar-content { padding: 20px 0; } 
  .section-card { margin-bottom: 20px; } 
@@ -454,11 +399,6 @@ body#main { background: #000; }
  .works-section h2, .process-section h2 { margin-bottom: 40px; } 
  .works-section .works-card { padding-top: 20px; gap: 10px; } 
  .works-section .works-label { margin-bottom: 20px; } 
- .sectionbox .visualbox .screen { height: 318px; top: 9px; border-radius: 7px; } 
- .sectionbox .textbox { width: 40.66%; } 
- .sectionbox .textbox .detail { gap: 5px; margin-top: 20px; } 
- .sectionbox .textbox .detail .btn-detail { margin-top: 16px; } 
- .sectionbox .textbox .detail .item .label { width: 100px; } 
   .popup-fold {width: 50vw;}
  .page-preview-container, .sidebar-content { padding: 10px 0; } 
  .section-card { margin-bottom: 10px; } 
@@ -480,14 +420,6 @@ body#main { background: #000; }
  .centerbox, .poster-container { width: 900px; } 
  .profile-section .profile-block .skills img { width: 40px; } 
 .profile-section .profile-layout { gap: 20px 60px; } 
- .sectionbox .visualbox { width: 50.33%; } 
- .sectionbox .textbox { width:47.33%; } 
- .sectionbox .visualbox .screen { height: 257.5px; top: 7px; border-radius: 6px; } 
- .sectionbox .mobilebox { width: 63.33%; } 
- .sectionbox .textbox .detail .item { gap: 30px; } 
- .sectionbox .textbox .detail { margin-top: 16px; } 
- .sectionbox .textbox .detail .item .label { width: 90px; } 
- .sectionbox .textbox .detail .btn-detail { margin-top: 10px; } 
  .page-preview-container, .sidebar-content { padding: 0; } 
  .sidebar-content { width: 40%; } 
  .detail-main #process-tab { width: 100%; } 
@@ -510,10 +442,6 @@ body#main { background: #000; }
  .profile-section .profile-layout { grid-template-columns: 1fr; } 
  .profile-section .profile-grid { grid-template-columns: 1.2fr 1fr; } 
  .profile-section .profile-block { gap: 6px; } 
- .visualbox { display: none; } 
- .sectionbox .textbox { width: 100%; } 
- .sectionbox .textbox h2 { margin-bottom: 14px; } 
- .sectionbox .textbox .detail { gap: 6px; } 
  .popup-fold {width: 60vw;}
  .bottom-section { margin-top: 20px; } 
  .works-section .works-grid { grid-template-columns: 1fr; } 
@@ -543,7 +471,6 @@ body#main { background: #000; }
  .profile-section .profile-grid { grid-template-columns: 1fr 1fr; } 
  .works-section h2, .process-section h2 { margin-bottom: 30px; } 
  .works-section .works-body { gap: 40px; } 
- .sectionbox .textbox .detail { gap: 6px; margin-top: 20px; } 
  .popup-label { left: 20px; top: 20px; transform: none; } 
  .popup-fold { width: 70vw; } 
  .tab-button .full-text { display: none; } 
@@ -589,9 +516,6 @@ body#main { background: #000; }
  .title-group { align-self: flex-start; } 
  .profile-section .profile-meta { width: 220px; display: flex; flex-direction: column; text-align: center; gap: 6px; } 
  .profile-section .photo { width: 100px; } 
- .sectionbox .textbox .detail { gap: 10px; margin-top: 30px; padding: 0; } 
- .sectionbox .textbox .detail .item .label { width: 90px; } 
- .sectionbox .textbox .detail .item { gap: 20px; } 
 .sub-btn { gap: 10px; text-align: center; } 
 .btn-back .full-text, .btn-visit .full-text { display: none; } 
 .btn-back .short-text, .btn-visit .short-text { display: inline; } 

@@ -1,51 +1,37 @@
-// Intersection Observer로 스크롤 감지
-const observerOptions = {
-    threshold: 0.2,  // 20% 보이면 트리거
-    rootMargin: '0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target); // 최초 1회만 실행되도록 이후 관찰 중단
-        }
-        // else {
-        //     entry.target.classList.remove('active');
-        // }
+// Case Study 리스트 ↔ 프리뷰 (index 전용)
+// 행에 hover/focus하면 프리뷰 스크린샷을 opacity로 교체하고, 설명은 행의 .case-concept 문구를 그대로 옮겨 쓴다(문구 단일 소스).
+// 924px 이하에서는 프리뷰가 숨겨지고 행 안의 .case-concept가 대신 노출된다.
+const caseItems = document.querySelectorAll('.case-item');
+const caseFrame = document.querySelector('.case-preview-frame');
+const casePreviewDesc = document.querySelector('.case-preview-desc');
+if (caseItems.length && caseFrame && casePreviewDesc) {
+    const caseImgs = caseFrame.querySelectorAll('img');
+    const activateCase = index => {
+        caseItems.forEach((item, i) => item.classList.toggle('is-active', i === index));
+        caseImgs.forEach((img, i) => {
+            img.classList.toggle('is-active', i === index);
+            img.style.top = '0';
+        });
+        casePreviewDesc.textContent = caseItems[index].querySelector('.case-concept').textContent.trim();
+    };
+    caseItems.forEach((item, i) => {
+        item.addEventListener('mouseenter', () => activateCase(i));
+        item.addEventListener('focusin', () => activateCase(i));
     });
-}, observerOptions);
+    activateCase(0);
 
-//Visualbox img control (transition 시간 계산 + hover 스크롤)
-document.querySelectorAll('.sectionbox .visualbox .screen img, .sectionbox .mobilebox .visualbox2 .screen img').forEach(img => {
-    const screen = img.closest('.screen');
-
-    img.addEventListener('load', function () {
-        const screenHeight = screen.offsetHeight;
-        const imgHeight = this.offsetHeight;
-        const distance = imgHeight - screenHeight;
-
-        const correctionFactor = this.closest('.vis2') ? 0.5 :
-            this.closest('.vis3') ? 0.1 : 1;
-        // 기준 속도: 1000px당 2초
-        const duration = Math.max(3, (distance / 1000) * 3.5) * correctionFactor;
-        this.style.transition = `${duration}s linear`;
+    // 프레임 hover 시 현재 스크린샷을 끝까지 스크롤 (scroll-figure와 같은 속도 공식)
+    caseFrame.addEventListener('mouseenter', () => {
+        const img = caseFrame.querySelector('img.is-active');
+        const distance = img.offsetHeight - caseFrame.offsetHeight;
+        if (distance <= 0) return;
+        img.style.transition = `opacity 0.4s ease, top ${Math.max(3, (distance / 1000) * 3.5)}s linear`;
+        img.style.top = `-${distance}px`;
     });
-    // 이미 로드된 이미지 처리
-    if (img.complete) img.dispatchEvent(new Event('load'));
-
-    screen.addEventListener('mouseenter', () => {
-        img.style.top = (screen.offsetHeight - img.offsetHeight) + 'px';
+    caseFrame.addEventListener('mouseleave', () => {
+        caseFrame.querySelector('img.is-active').style.top = '0';
     });
-    screen.addEventListener('mouseleave', () => {
-        img.style.top = '0';
-    });
-});
-
-// 모든 sectionbox의 textbox 관찰
-document.querySelectorAll('.sectionbox .textbox').forEach(textbox => {
-    observer.observe(textbox);
-});
+}
 
 // 탭 전환 함수
 function showTab(tabName, event) {
