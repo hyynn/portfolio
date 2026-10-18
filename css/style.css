@@ -295,7 +295,6 @@ body#main { background: #000; }
 .sub02 .section-card.active { border-left: 4px solid #656565; background: #f9f9f9; } 
 .sub03 .section-card.active { border-left: 4px solid #032753; background: #f9f9f9; } 
 .sub04 .section-card.active { border-left: 4px solid #22356F; background: #f9f9f9; } 
-.sub05 .section-card.active { border-left: 4px solid #012C4E; background: #f9f9f9; } 
 .section-card:last-child { margin-bottom: 0; } 
 
 .card-header { margin-bottom: 15px; } 
