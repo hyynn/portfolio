@@ -43,8 +43,8 @@
  --color-line-faint: rgba(0, 0, 0, 0.08); /* 카드 안 미세 구분선 */
  --color-line-frame: #353225;       /* 스크린샷 프레임 테두리 */
  /* 포인트 */
- --color-point: #C9A77C;            /* 번호, 강조 단어, Live 버튼 */
- --color-point-hover: #DDC299;      /* 포인트 hover, Live 버튼 깜빡임 */
+ --color-point: #657049;            /* 번호, 강조 단어, Live 버튼 — 배경(#F3F0E9) 위 4.65:1, 흰색 위 5.29:1 */
+ --color-point-hover: #596340;      /* 포인트 hover, Live 버튼 깜빡임 — point에 검정 12%. 밝은 글자 버튼이라 hover는 어둡게 */
  /* 기타 */
  --color-white: #FFF;               /* 영상 컨트롤·팝업 라벨 등 이미지/영상 위 순백 */
  --color-shadow: rgba(0, 0, 0, 0.08); /* 카드 기본 그림자 */
@@ -169,7 +169,7 @@ body#main { background: var(--color-bg-dark); }
 .featured-detail-btn { display: inline-flex; align-items: center; background: var(--color-bg-button); color: var(--color-text-inverse); font-weight: 600; padding: 12px 22px; border-radius: 6px; transition: background 0.2s ease; }
 .featured-detail-btn:hover { background: var(--color-bg-button-hover); }
 .featured-detail-btn.is-disabled { background: none; border: 1px solid var(--color-line); color: var(--color-text-disabled); cursor: default; }
-.featured-live-btn { display: inline-flex; align-items: center; background: var(--color-point); font-weight: 600; padding: 12px 22px; border-radius: 6px; transition: background 0.2s ease, transform 0.2s ease; cursor: pointer; animation: liveBtnBlink 2s ease-in-out infinite; }
+.featured-live-btn { display: inline-flex; align-items: center; background: var(--color-point); color: var(--color-text-inverse); font-weight: 600; padding: 12px 22px; border-radius: 6px; transition: background 0.2s ease, transform 0.2s ease; cursor: pointer; animation: liveBtnBlink 2s ease-in-out infinite; }
 .featured-live-btn:hover { background: var(--color-point-hover); animation: none; }
 @keyframes liveBtnBlink { 0%, 100% { background: var(--color-point); } 50% { background: var(--color-point-hover); } }
 
@@ -236,7 +236,7 @@ body#main { background: var(--color-bg-dark); }
 .sub06 .section-card { cursor: default; }
 .project-retro { padding: 50px 0 0; }
 .code-tree { font-family: Menlo, Consolas, monospace; font-size: var(--fs-caption); line-height: 1.7; color: var(--color-text-sub); background: var(--color-bg); border-radius: 8px; padding: 16px; overflow-x: auto; white-space: pre; }
-.todo-slot { border: 1px dashed var(--color-point); border-radius: 8px; padding: 16px 20px; font-size: var(--fs-body-2); color: #8a7556; background: color-mix(in srgb, var(--color-point) 8%, transparent); line-height: 1.6; }
+.todo-slot { border: 1px dashed var(--color-point); border-radius: 8px; padding: 16px 20px; font-size: var(--fs-body-2); color: var(--color-point-hover); background: color-mix(in srgb, var(--color-point) 8%, transparent); line-height: 1.6; }
 .todo-slot::before { content: '✎ 작성 예정 · '; font-weight: 600; }
 .todo-inline { color: var(--color-point); }
 
