@@ -2,6 +2,9 @@
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Draggable, InertiaPlugin, Observer);
 
+// style.css :root 컬러 토큰 읽기 — GSAP 색 트윈은 var()를 보간하지 못하므로 실제 값으로 변환해서 사용
+const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
 // 모바일 주소창 표시/숨김에 따른 뷰포트 높이 변화로 pin 좌표가 흔들리는 것을 방지
 ScrollTrigger.config({ ignoreMobileResize: true });
 
@@ -163,11 +166,11 @@ gsap.timeline({
     .to(".hero-reveal-given", { fontSize: "18vw", duration: 2, ease: "power2.inOut" })
     .to(".hero-reveal-given", { xPercent: -150, duration: 4, ease: "none" })
     .fromTo("body",
-        { backgroundColor: "#000" },
-        { backgroundColor: "#F3F0E9", duration: 4, ease: "power2.out" }, "<")
+        { backgroundColor: cssVar("--color-bg-dark") },
+        { backgroundColor: cssVar("--color-bg"), duration: 4, ease: "power2.out" }, "<")
     .fromTo(".hero-reveal-name",
-        { color: "#F3F0E9" },
-        { color: "#333", duration: 4, ease: "power2.out" }, "<");
+        { color: cssVar("--color-bg") },
+        { color: cssVar("--color-text"), duration: 4, ease: "power2.out" }, "<");
 
 // 리사이즈 이벤트 - 가로 크기 변경 시에만 실행
 let prevWidth = window.innerWidth;

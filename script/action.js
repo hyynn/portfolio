@@ -381,7 +381,7 @@ if (processVideo) {
     let processSeeking = false;
 
     function setProcessProgressFill(percent) {
-        processProgress.style.background = `linear-gradient(to right, #fff ${percent}%, rgba(255, 255, 255, 0.35) ${percent}%)`;
+        processProgress.style.background = `linear-gradient(to right, var(--color-white) ${percent}%, var(--color-control-track) ${percent}%)`;
     }
 
     function updateProcessProgress() {
