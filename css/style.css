@@ -4,7 +4,7 @@
    min / 가변 / max 순. 반응형은 clamp로 처리하므로 미디어쿼리에서 font-size를 재선언하지 않는다 */
 :root {
  --fs-display-1: clamp(56px, 10vw, 180px);   /* hero 이름, thankyou 가로 문장 */
- --fs-display-2: clamp(40px, 6.5vw, 130px);  /* React / Publishing Projects 섹션 제목 */
+ --fs-display-2: clamp(40px, 6vw, 110px);  /* React / Publishing Projects 섹션 제목 */
  --fs-headline-1: clamp(28px, 4.2vw, 80px);  /* Profile / Works / How I Work 섹션 제목 */
  --fs-headline-2: clamp(24px, 2.6vw, 50px);  /* Popup & Poster / Banner 섹션 제목 (h2 기본) */
  --fs-headline-3: clamp(24px, 2.19vw, 42px); /* 서브페이지 프로젝트명, footer 연락처 */
@@ -216,6 +216,7 @@ body#main { background: var(--color-bg-dark); }
 /* sub06 (Featured 상세) - Design / Publishing / Frontend 탭 */
 .project-problem { margin-top: 30px; }
 .project-problem-label { font-size: var(--fs-body-1); font-weight: 600; margin-bottom: 10px; }
+.project-problem p { font-size: var(--fs-body-1); color: var(--color-text-sub); line-height: 1.7; }
 .detail-section { padding: 50px 0; display: flex; flex-direction: column; gap: 40px; }
 .compare-block { display: flex; flex-direction: column; gap: 24px; }
 .compare-heading h2 { font-size: var(--fs-headline-4); font-weight: 600; margin-bottom: 10px; }
@@ -236,6 +237,8 @@ body#main { background: var(--color-bg-dark); }
 .sub06 .section-card { cursor: default; }
 .project-retro { padding: 50px 0 0; }
 .code-tree { font-family: Menlo, Consolas, monospace; font-size: var(--fs-caption); line-height: 1.7; color: var(--color-text-sub); background: var(--color-bg); border-radius: 8px; padding: 16px; overflow-x: auto; white-space: pre; }
+.decision-item .code-tree { margin-top: 12px; }
+.repo-link { font-size: var(--fs-body-1); text-decoration: underline; text-underline-offset: 3px; }
 .todo-slot { border: 1px dashed var(--color-point); border-radius: 8px; padding: 16px 20px; font-size: var(--fs-body-2); color: var(--color-point-hover); background: color-mix(in srgb, var(--color-point) 8%, transparent); line-height: 1.6; }
 .todo-slot::before { content: '✎ 작성 예정 · '; font-weight: 600; }
 .todo-inline { color: var(--color-point); }
