@@ -63,7 +63,9 @@
                 </div>
                 <div class="project-problem">
                     <h2 class="project-problem-label">Problem</h2>
-                    <p class="todo-slot">문제 정의 — 이 프로젝트에서 해결하려 한 핵심 문제와 목표를 한 문단으로</p>
+                    <p>제약회사 사이트에는 기업소개, 허가 제품, ESG처럼 성격이 다른 정보가 한데 모여 있어서, 방문자가 원하는 정보까지 가는 길이 길어지기 쉽습니다.
+                        메뉴 단계에서 이 세 영역을 나누고, 항목이 많은 제품 정보는 표로 정리해 비교하기 쉽게 만드는 것을 목표로 했습니다.
+                        연구 현장 사진이 없어서 이미지는 AI로 만들었고, 색과 이미지 톤으로 신뢰감을 주는 데 집중했습니다.</p>
                 </div>
             </div>
         </div>
@@ -445,7 +447,10 @@
 
             <section class="project-retro">
                 <h2 class="workflow-title">Retrospective</h2>
-                <p class="todo-slot">회고 — 아쉬웠던 점, 다시 한다면 바꿀 부분, 다음 개선 계획</p>
+                <ul class="point-list">
+                    <li><strong>처음부터 변수로 시작하지 않은 것</strong><br>리팩토링 2일 중 상당 부분이 hex 색과 고정 font-size를 변수와 clamp로 바꾸는 일이었습니다. 이후 Entro와 Essential Studio에서도 같은 정리를 반복했고, 한샘 리디자인부터는 토큰을 먼저 정하고 시작했습니다.</li>
+                    <li><strong>모바일에서의 제품 표</strong><br>제품명, 성분명, 적응증, 허가기관까지 열이 많아 모바일에서는 표를 가로 스크롤로 처리했습니다. 그래서 적응증 열을 보려면 옆으로 밀어야 합니다. 다시 만든다면 모바일에서는 제품별 카드 형태로 바꾸겠습니다.</li>
+                </ul>
             </section>
         </div>
     </main>

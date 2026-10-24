@@ -239,9 +239,6 @@ body#main { background: var(--color-bg-dark); }
 .code-tree { font-family: Menlo, Consolas, monospace; font-size: var(--fs-caption); line-height: 1.7; color: var(--color-text-sub); background: var(--color-bg); border-radius: 8px; padding: 16px; overflow-x: auto; white-space: pre; }
 .decision-item .code-tree { margin-top: 12px; }
 .repo-link { font-size: var(--fs-body-1); text-decoration: underline; text-underline-offset: 3px; }
-.todo-slot { border: 1px dashed var(--color-point); border-radius: 8px; padding: 16px 20px; font-size: var(--fs-body-2); color: var(--color-point-hover); background: color-mix(in srgb, var(--color-point) 8%, transparent); line-height: 1.6; }
-.todo-slot::before { content: '✎ 작성 예정 · '; font-weight: 600; }
-.todo-inline { color: var(--color-point); }
 
 @media (max-width: 1400px) {
  .compare-row { flex-direction: column; align-items: stretch; }

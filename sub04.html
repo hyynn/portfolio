@@ -63,7 +63,9 @@
                 </div>
                 <div class="project-problem">
                     <h2 class="project-problem-label">Problem</h2>
-                    <p class="todo-slot">문제 정의 — 이 프로젝트에서 해결하려 한 핵심 문제와 목표를 한 문단으로</p>
+                    <p>에이전시 사이트라 사이트에 업로드될 작업물들이 먼저 보여야 했습니다.
+                        마침 Apple이 Liquid Glass를 발표한 시기라, 그 효과를 코드로 어디까지 낼 수 있는지 직접 해보고 싶었습니다.
+                        배경은 무채색으로 비우고 유리 질감은 카드와 텍스트 박스에만 써서, 효과가 작업물을 가리지 않게 하는 것을 기준으로 삼았습니다.</p>
                 </div>
             </div>
         </div>
@@ -357,7 +359,11 @@
 
             <section class="project-retro">
                 <h2 class="workflow-title">Retrospective</h2>
-                <p class="todo-slot">회고 — 아쉬웠던 점, 다시 한다면 바꿀 부분, 다음 개선 계획</p>
+                <ul class="point-list">
+                    <li><strong>이틀 만에 잡은 구조</strong><br>일정이 짧아 리퀴드 글래스 효과가 들어간 부분들을 이미지로 넣었다가, 리팩토링 때 걷어내고 flex 레이아웃으로 다시 만들었습니다.</li>
+                    <li><strong>리퀴드 글래스 위 글자 대비</strong><br>backdrop-filter 위의 글자는 뒤 이미지에 따라 대비가 달라지는데, 당시에는 눈으로만 보고 넘어갔습니다. 다음에는 가장 밝은 이미지가 지나갈 때를 기준으로 대비를 직접 재고, 기준에 못 미치면 글자 뒤에 어두운 막을 까는 식으로 보완하려 합니다.</li>
+                    <li><strong>메인 한 페이지</strong><br>작업물 상세 페이지가 없어서 슬라이드에서 탐색이 끝납니다. 상세 페이지를 붙이는 것이 다음 단계입니다.</li>
+                </ul>
             </section>
         </div>
     </main>
